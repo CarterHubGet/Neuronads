@@ -1,0 +1,2468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEURONADS: Blockchain Guardians</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --neon-purple: #9D4EDD;
+            --neon-purple-light: #B964F7;
+            --neon-blue: #7B2CF3;
+            --dark-blue: #0E0B24;
+            --deeper-blue: #06051A;
+            --darkest-blue: #020213;
+            --text-color: #C8D8E4;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Chakra Petch', sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark-blue);
+            color: var(--text-color);
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(101, 45, 193, 0.2) 0%, transparent 30%),
+                radial-gradient(circle at 80% 80%, rgba(157, 78, 221, 0.2) 0%, transparent 30%),
+                linear-gradient(rgba(6, 5, 26, 0.9) 0%, rgba(6, 5, 26, 0.95) 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+            perspective: 1000px; /* For 3D effects */
+        }
+        
+        /* Circuit board background effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath fill='none' stroke='%239D4EDD' stroke-width='0.25' d='M10,10 L90,10 M10,30 L90,30 M10,50 L90,50 M10,70 L90,70 M10,90 L90,90 M10,10 L10,90 M30,10 L30,90 M50,10 L50,90 M70,10 L70,90 M90,10 L90,90 M20,20 L20,40 L40,40 L40,20 Z M60,60 L60,80 L80,80 L80,60 Z'/%3E%3C/svg%3E");
+            opacity: 0.07;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        /* Infinite Space Background */
+        .infinite-space-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200%;  /* Double height for seamless looping */
+            background-repeat: repeat-y;
+            background-size: 100% 50%;  /* Each image takes 50% of the container */
+            animation: scrollSpace 120s linear infinite;
+            z-index: -3;
+            will-change: transform;
+        }
+        
+        @keyframes scrollSpace {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-50%);  /* Move up by 50% to create seamless loop */
+            }
+        }
+        
+        /* Stars background effect */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+            overflow: hidden;
+        }
+        
+        /* Header and Logo */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--neon-purple-light);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 0 10px rgba(157, 78, 221, 0.5), 0 0 20px rgba(157, 78, 221, 0.3);
+            animation: glitchText 5s infinite, floatLogo 3s ease-in-out infinite alternate;
+        }
+        
+        /* Neon effect for logo */
+        .logo::before, .logo::after {
+            content: "NEURONADS";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: var(--neon-purple-light);
+            filter: blur(0.5px);
+            z-index: -1;
+        }
+        
+        .logo::before {
+            opacity: 0.8;
+            filter: blur(5px);
+        }
+        
+        .logo::after {
+            opacity: 0.4;
+            filter: blur(15px);
+        }
+        
+        .subtitle {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 1.2rem;
+            color: var(--neon-blue);
+            letter-spacing: 5px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            animation: revealText 1s ease-out;
+        }
+        
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            margin: 0 auto 50px;
+            max-width: 800px;
+            border: 1px solid var(--neon-purple);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 0 15px rgba(157, 78, 221, 0.3);
+            animation: fadeIn 1s ease-out, glowPulse 4s infinite alternate;
+        }
+        
+        nav::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(157, 78, 221, 0.1);
+            z-index: -1;
+        }
+        
+        nav a {
+            flex: 1;
+            text-align: center;
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 15px 0;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            overflow: hidden;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 20%;
+            height: 60%;
+            width: 1px;
+            background: rgba(157, 78, 221, 0.3);
+        }
+        
+        nav a:last-child::after {
+            display: none;
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--neon-purple-light);
+            text-shadow: 0 0 5px rgba(157, 78, 221, 0.5);
+        }
+        
+        nav a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--neon-purple-light);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s ease;
+        }
+        
+        nav a:hover::before, nav a.active::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        /* Chapters heading */
+        .chapters-heading {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--neon-purple-light);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(157, 78, 221, 0.5), 0 0 20px rgba(157, 78, 221, 0.3);
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.5s;
+        }
+        
+        .chapters-heading::before, .chapters-heading::after {
+            content: "CHAPTERS";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: var(--neon-purple-light);
+            filter: blur(0.5px);
+            z-index: -1;
+        }
+        
+        .chapters-heading::before {
+            opacity: 0.8;
+            filter: blur(5px);
+        }
+        
+        .chapters-heading::after {
+            opacity: 0.4;
+            filter: blur(15px);
+        }
+        
+        /* Chapters structure - new layout with alternating rectangles */
+        .chapters-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .chapter-row {
+            display: flex;
+            gap: 30px;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .chapter-row.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* First row animation */
+        .chapter-row:nth-child(1) .chapter-image-container {
+            transform: translateX(-100px);
+            opacity: 0;
+            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s;
+        }
+        
+        .chapter-row:nth-child(1) .chapter-text-container {
+            transform: translateX(100px);
+            opacity: 0;
+            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.4s;
+        }
+        
+        .chapter-row.visible:nth-child(1) .chapter-image-container,
+        .chapter-row.visible:nth-child(1) .chapter-text-container {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        
+        /* Second row animation */
+        .chapter-row:nth-child(2) .chapter-text-container {
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s;
+        }
+        
+        .chapter-row:nth-child(2) .chapter-image-container {
+            transform: translateY(-100px);
+            opacity: 0;
+            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.4s;
+        }
+        
+        .chapter-row.visible:nth-child(2) .chapter-text-container,
+        .chapter-row.visible:nth-child(2) .chapter-image-container {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        /* Third row special zoom effect */
+        .chapter-row:nth-child(3) {
+            position: relative;
+            transition: all 1s ease-out;
+        }
+        
+        .chapter-row:nth-child(3)::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(157, 78, 221, 0.5) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            z-index: -1;
+            transition: all 1.5s ease-out;
+            border-radius: 50%;
+        }
+        
+        .chapter-row.visible:nth-child(3)::before {
+            width: 120%;
+            height: 120%;
+            opacity: 0.5;
+        }
+        
+        .chapter-row:nth-child(3) .chapter-image-container {
+            transform: scale(0.7);
+            opacity: 0;
+            transition: all 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s;
+        }
+        
+        .chapter-row:nth-child(3) .chapter-text-container {
+            transform: scale(0.7);
+            opacity: 0;
+            transition: all 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.4s;
+        }
+        
+        .chapter-row.visible:nth-child(3) .chapter-image-container,
+        .chapter-row.visible:nth-child(3) .chapter-text-container {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        .chapter-image-container, .chapter-text-container {
+            flex: 1;
+            background-color: var(--deeper-blue);
+            border: 1px solid var(--neon-purple);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(157, 78, 221, 0.2);
+            position: relative;
+            transition: all 0.3s ease;
+            min-height: 300px;
+            z-index: 1;
+        }
+        
+        .chapter-image-container:hover, .chapter-text-container:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(157, 78, 221, 0.3);
+        }
+        
+        .chapter-image-container::before, .chapter-text-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(157, 78, 221, 0.05);
+            z-index: -1;
+        }
+        
+        /* Hover glow effect */
+        .chapter-image-container:hover::after, .chapter-text-container:hover::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            box-shadow: 0 0 20px var(--neon-purple), inset 0 0 10px var(--neon-purple);
+            border-radius: 10px;
+            opacity: 0;
+            animation: glowEffect 1s forwards;
+            pointer-events: none;
+        }
+        
+        /* Large Feature Image for third row */
+        .feature-image-wrapper {
+            position: relative;
+            width: 100%;
+            margin: 80px 0;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 15px;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .feature-image-wrapper.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .feature-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.1);
+            transition: transform 1.5s ease;
+        }
+        
+        .feature-image-wrapper.visible .feature-image {
+            transform: scale(1);
+        }
+        
+        .feature-image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(6, 5, 26, 0.7), transparent, rgba(6, 5, 26, 0.7));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+        
+        .feature-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: var(--text-color);
+            text-shadow: 0 0 15px var(--neon-purple), 0 0 30px var(--neon-purple);
+            text-align: center;
+            max-width: 80%;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease 0.5s;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .feature-image-wrapper.visible .feature-text {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Image Carousel with enhanced effects */
+        .chapter-image-carousel {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+        }
+        
+        .carousel-item {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chapter-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .chapter-image-container:hover .chapter-image {
+            transform: scale(1.05);
+        }
+        
+        .carousel-control {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(6, 5, 26, 0.7);
+            color: var(--neon-purple-light);
+            border: 1px solid var(--neon-purple);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            opacity: 0;
+        }
+        
+        .carousel-control:hover {
+            background-color: rgba(157, 78, 221, 0.3);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .carousel-control.prev {
+            left: 10px;
+        }
+        
+        .carousel-control.next {
+            right: 10px;
+        }
+        
+        .chapter-image-container:hover .carousel-control {
+            opacity: 1;
+        }
+        
+        /* Fancy carousel indicators */
+        .carousel-indicators {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+        
+        .indicator {
+            width: 10px;
+            height: 10px;
+            background-color: rgba(157, 78, 221, 0.3);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .indicator::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: var(--neon-purple-light);
+            opacity: 0.5;
+            transition: transform 0.3s ease;
+        }
+        
+        .indicator:hover::before {
+            transform: translate(-50%, -50%) scale(1.5);
+        }
+        
+        .indicator.active {
+            background-color: var(--neon-purple-light);
+            box-shadow: 0 0 5px var(--neon-purple-light);
+        }
+        
+        .indicator.active::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 1px solid var(--neon-purple-light);
+            opacity: 0;
+            animation: ripple 1.5s infinite;
+        }
+        
+        .image-upload-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .image-upload-container label {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: rgba(157, 78, 221, 0.2);
+            border: 1px solid var(--neon-purple);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .image-upload-container label:hover {
+            background-color: rgba(157, 78, 221, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(157, 78, 221, 0.3);
+        }
+        
+        .image-upload-container input[type="file"] {
+            display: none;
+        }
+        
+        .add-image-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 60px;
+            background-color: rgba(6, 5, 26, 0.7);
+            border: 1px solid var(--neon-purple);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--neon-purple-light);
+            z-index: 10;
+            opacity: 0;
+        }
+        
+        .chapter-image-container:hover .add-image-btn {
+            opacity: 1;
+            animation: pulse 2s infinite;
+        }
+        
+        .add-image-btn:hover {
+            background-color: rgba(157, 78, 221, 0.3);
+            transform: scale(1.1);
+        }
+        
+        /* Text container animations and effects */
+        .chapter-text {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .chapter-text::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at top left, rgba(157, 78, 221, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at bottom right, rgba(157, 78, 221, 0.1) 0%, transparent 20%);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .chapter-text-container:hover .chapter-text::before {
+            opacity: 1;
+        }
+        
+        .chapter-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--neon-purple-light);
+            margin-bottom: 5px;
+            display: inline-block;
+            position: relative;
+        }
+        
+        .chapter-number::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: var(--neon-purple-light);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease 0.2s;
+        }
+        
+        .chapter-text-container:hover .chapter-number::after {
+            transform: scaleX(1);
+        }
+        
+        .chapter-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            line-height: 1.3;
+            position: relative;
+            display: inline-block;
+            z-index: 1;
+        }
+        
+        .chapter-title::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--neon-purple-light), transparent);
+            transition: width 0.4s ease;
+            z-index: -1;
+        }
+        
+        .chapter-text-container:hover .chapter-title::before {
+            width: 100%;
+        }
+        
+        .chapter-description {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chapter-description::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 70%, var(--deeper-blue));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .chapter-text-container:hover .chapter-description::after {
+            opacity: 0.5;
+        }
+        
+        .chapter-title-input, .chapter-description-textarea {
+            background-color: rgba(6, 5, 26, 0.5);
+            border: 1px solid var(--neon-purple);
+            border-radius: 5px;
+            color: var(--text-color);
+            padding: 10px;
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+        
+        .chapter-title-input {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .chapter-description-textarea {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 0.9rem;
+            resize: vertical;
+            min-height: 150px;
+            flex: 1;
+        }
+        
+        .read-more {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--neon-purple-light);
+            border: 1px solid var(--neon-purple);
+            border-radius: 30px;
+            padding: 8px 25px;
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            margin-top: auto;
+            align-self: flex-start;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .read-more::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, var(--neon-purple), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+            opacity: 0.15;
+            z-index: -1;
+        }
+        
+        .read-more:hover {
+            color: white;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+            box-shadow: 0 0 15px rgba(157, 78, 221, 0.5);
+            transform: translateY(-3px);
+        }
+        
+        .read-more:hover::before {
+            transform: translateX(0);
+        }
+        
+        .edit-toggle {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(6, 5, 26, 0.7);
+            border: 1px solid var(--neon-purple);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--neon-purple-light);
+            z-index: 10;
+        }
+        
+        .edit-toggle:hover {
+            background-color: rgba(157, 78, 221, 0.2);
+            transform: rotate(180deg);
+        }
+        
+        .save-button {
+            background-color: rgba(157, 78, 221, 0.2);
+            color: var(--text-color);
+            border: 1px solid var(--neon-purple);
+            border-radius: 5px;
+            padding: 8px 15px;
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            align-self: flex-end;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .save-button::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: -100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.4s;
+        }
+        
+        .save-button:hover {
+            background-color: rgba(157, 78, 221, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        .save-button:hover::after {
+            left: 100%;
+        }
+        
+        .view-mode .edit-content {
+            display: none;
+        }
+        
+        .edit-mode .view-content {
+            display: none;
+        }
+        
+        /* Info Section with animated entry */
+        .info-section {
+            background-color: var(--deeper-blue);
+            border: 1px solid var(--neon-purple);
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 60px;
+            box-shadow: 0 0 15px rgba(157, 78, 221, 0.2);
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+        }
+        
+        .info-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .info-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--neon-purple), transparent);
+            z-index: 1;
+        }
+        
+        .info-heading {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--neon-purple-light);
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(157, 78, 221, 0.3);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .info-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--neon-purple-light);
+            box-shadow: 0 0 10px var(--neon-purple-light);
+        }
+        
+        .info-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.6s ease;
+        }
+        
+        .info-section.visible .info-item {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .info-section.visible .info-item:nth-child(1) {
+            transition-delay: 0.2s;
+        }
+        
+        .info-section.visible .info-item:nth-child(2) {
+            transition-delay: 0.4s;
+        }
+        
+        .info-section.visible .info-item:nth-child(3) {
+            transition-delay: 0.6s;
+        }
+        
+        .info-icon {
+            min-width: 40px;
+            height: 40px;
+            background-color: rgba(157, 78, 221, 0.1);
+            border: 1px solid var(--neon-purple);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--neon-purple-light);
+            font-size: 1.2rem;
+            box-shadow: 0 0 10px rgba(157, 78, 221, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .info-item:hover .info-icon {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(157, 78, 221, 0.4);
+        }
+        
+        .info-text {
+            flex: 1;
+        }
+        
+        .info-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--neon-purple-light);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .info-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--neon-purple-light), transparent);
+            transition: width 0.4s ease;
+        }
+        
+        .info-item:hover .info-title::after {
+            width: 100%;
+        }
+        
+        .info-description {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .info-description::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: var(--neon-purple);
+            transition: height 0.4s ease;
+            opacity: 0.5;
+            border-radius: 2px;
+            z-index: -1;
+        }
+        
+        .info-item:hover .info-description::before {
+            height: 100%;
+        }
+        
+        .edit-info-toggle {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: rgba(6, 5, 26, 0.7);
+            border: 1px solid var(--neon-purple);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--neon-purple-light);
+            z-index: 10;
+        }
+        
+        .edit-info-toggle:hover {
+            background-color: rgba(157, 78, 221, 0.2);
+            transform: rotate(180deg);
+        }
+        
+        .info-section.view-mode .edit-info-content {
+            display: none;
+        }
+        
+        .info-section.edit-mode .view-info-content {
+            display: none;
+        }
+        
+        .info-title-input {
+            background-color: rgba(6, 5, 26, 0.5);
+            border: 1px solid var(--neon-purple);
+            border-radius: 5px;
+            color: var(--text-color);
+            padding: 8px 10px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            width: 100%;
+            margin-bottom: 8px;
+        }
+        
+        .info-description-textarea {
+            background-color: rgba(6, 5, 26, 0.5);
+            border: 1px solid var(--neon-purple);
+            border-radius: 5px;
+            color: var(--text-color);
+            padding: 8px 10px;
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 0.9rem;
+            resize: vertical;
+            min-height: 100px;
+            width: 100%;
+        }
+        
+        .add-info-item {
+            background-color: rgba(157, 78, 221, 0.1);
+            border: 1px dashed var(--neon-purple);
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .add-info-item:hover {
+            background-color: rgba(157, 78, 221, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .save-info-button {
+            background-color: rgba(157, 78, 221, 0.2);
+            color: var(--text-color);
+            border: 1px solid var(--neon-purple);
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            align-self: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .save-info-button::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: -100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.4s;
+        }
+        
+        .save-info-button:hover {
+            background-color: rgba(157, 78, 221, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        .save-info-button:hover::after {
+            left: 100%;
+        }
+        
+        /* Floating particles */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: -2;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: var(--neon-purple-light);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: floatParticle 15s linear infinite;
+        }
+        
+        .particle::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--neon-purple-light);
+            border-radius: 50%;
+            filter: blur(1px);
+        }
+        
+        /* Cosmic stone floating effect */
+        .cosmic-stone {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at center, var(--neon-purple-light) 0%, transparent 70%);
+            animation: float 3s ease-in-out infinite;
+            opacity: 0.6;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .cosmic-stone.small {
+            width: 5px;
+            height: 5px;
+        }
+        
+        .cosmic-stone.medium {
+            width: 10px;
+            height: 10px;
+        }
+        
+        .cosmic-stone.large {
+            width: 15px;
+            height: 15px;
+        }
+        
+        /* Neural network effect in background */
+        .neural-network {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        /* Glitch effect on hover */
+        .glitch-container {
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+        }
+        
+        .glitch-item {
+            position: relative;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .glitch-item:hover {
+            animation: glitch 0.5s infinite;
+        }
+        
+        /* Loading effect for content */
+        .loading-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(to right, var(--neon-purple), var(--neon-blue));
+            z-index: 9999;
+            box-shadow: 0 0 10px var(--neon-purple);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(6, 5, 26, 0.7);
+            border: 1px solid var(--neon-purple);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 100;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            color: var(--neon-purple-light);
+            font-size: 1.5rem;
+        }
+        
+        .scroll-indicator.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .scroll-indicator:hover {
+            background-color: rgba(157, 78, 221, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(157, 78, 221, 0.3);
+        }
+        
+        /* Media Queries */
+        @media (max-width: 992px) {
+            .logo {
+                font-size: 3rem;
+            }
+            
+            .chapters-heading {
+                font-size: 2.5rem;
+            }
+            
+            .feature-text {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .chapter-row {
+                flex-direction: column;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .chapters-heading {
+                font-size: 2rem;
+            }
+            
+            nav {
+                flex-wrap: wrap;
+            }
+            
+            nav a {
+                flex: auto;
+                width: 50%;
+            }
+            
+            nav a:nth-child(2n)::after {
+                display: none;
+            }
+            
+            .info-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .info-icon {
+                margin-bottom: 10px;
+            }
+            
+            .feature-image-wrapper {
+                height: 300px;
+            }
+            
+            .feature-text {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container {
+                padding: 10px 0;
+            }
+            
+            body {
+                padding: 15px;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 0.8rem;
+                letter-spacing: 3px;
+            }
+            
+            .chapters-heading {
+                font-size: 2rem;
+                margin-bottom: 20px;
+            }
+            
+            .chapter-title {
+                font-size: 1.3rem;
+            }
+            
+            .chapter-description {
+                font-size: 0.85rem;
+            }
+            
+            nav a {
+                font-size: 0.8rem;
+                padding: 12px 0;
+            }
+            
+            .info-heading {
+                font-size: 1.5rem;
+            }
+            
+            .info-title {
+                font-size: 1.1rem;
+            }
+            
+            .feature-image-wrapper {
+                height: 200px;
+            }
+            
+            .feature-text {
+                font-size: 1.2rem;
+            }
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+        
+        @keyframes floatLogo {
+            0%, 100% {
+                transform: translateY(0) rotate(-1deg);
+            }
+            50% {
+                transform: translateY(-10px) rotate(1deg);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+        }
+        
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+        
+        @keyframes glowPulse {
+            0%, 100% {
+                box-shadow: 0 0 10px rgba(157, 78, 221, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(157, 78, 221, 0.5);
+            }
+        }
+        
+        @keyframes ripple {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 0.5;
+            }
+            100% {
+                width: 30px;
+                height: 30px;
+                opacity: 0;
+            }
+        }
+        
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes revealText {
+            0% {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes glitchText {
+            0%, 100% {
+                text-shadow: 0 0 10px rgba(157, 78, 221, 0.5), 0 0 20px rgba(157, 78, 221, 0.3);
+                transform: translateY(0);
+            }
+            5%, 95% {
+                text-shadow: 0.05em 0 0 rgba(255, 0, 0, .75), -0.025em -.05em 0 rgba(0, 255, 0, .75), .025em .05em 0 rgba(0, 0, 255, .75);
+                transform: translateY(-1px);
+            }
+            10%, 90% {
+                text-shadow: 0 0 10px rgba(157, 78, 221, 0.5), 0 0 20px rgba(157, 78, 221, 0.3);
+                transform: translateY(0);
+            }
+            15%, 85% {
+                text-shadow: 0.05em 0 0 rgba(255, 0, 0, .75), -0.025em -.05em 0 rgba(0, 255, 0, .75), .025em .05em 0 rgba(0, 0, 255, .75);
+                transform: translateY(1px);
+            }
+            20%, 80% {
+                text-shadow: 0 0 10px rgba(157, 78, 221, 0.5), 0 0 20px rgba(157, 78, 221, 0.3);
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes glowEffect {
+            0% {
+                opacity: 0.5;
+            }
+            50% {
+                opacity: 0.1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        
+        @keyframes glitch {
+            0% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-2px);
+            }
+            50% {
+                transform: translateX(2px);
+            }
+            75% {
+                transform: translateX(-1px);
+            }
+            100% {
+                transform: translateX(1px);
+            }
+        }
+        
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-1000px) translateX(100px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-bar" id="loadingBar"></div>
+    <!-- Infinite Space Background SVG -->
+    <div class="infinite-space-bg" id="infiniteSpaceBg"></div>
+    <div class="stars" id="stars"></div>
+    <div class="particles-container" id="particles"></div>
+    <canvas class="neural-network" id="neuralNetwork"></canvas>
+    
+    <div class="container">
+        <header>
+            <h1 class="logo">NEURONADS</h1>
+            <div class="subtitle">BLOCKCHAIN GUARDIANS</div>
+            
+            <nav>
+                <a href="#lore" class="active">LORE</a>
+                <a href="#comics">COMICS</a>
+                <a href="#mint">MINT</a>
+                <a href="#about">about/contact</a>
+            </nav>
+        </header>
+        
+        <main>
+            <div class="chapters-heading">
+                CHAPTERS
+            </div>
+            
+            <div class="chapters-container">
+                <!-- Chapter 1 Row -->
+                <div class="chapter-row">
+                    <!-- Image Container -->
+                    <div class="chapter-image-container">
+                        <div class="chapter-image-carousel" id="chapter1-carousel">
+                            <div class="carousel-inner" id="chapter1-carousel-inner">
+                                <div class="carousel-item active">
+                                    <img class="chapter-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600' viewBox='0 0 600 600'%3E%3Crect width='600' height='600' fill='%230E0B24'/%3E%3Cpath d='M300,150 C150,150 150,450 300,450 C450,450 450,150 300,150 Z' fill='none' stroke='%239D4EDD' stroke-width='1' opacity='0.3'/%3E%3Ccircle cx='300' cy='300' r='100' fill='%239D4EDD' opacity='0.1'/%3E%3Ccircle cx='300' cy='260' r='10' fill='%239D4EDD' opacity='0.8'/%3E%3Ccircle cx='260' cy='300' r='10' fill='%239D4EDD' opacity='0.8'/%3E%3Ccircle cx='340' cy='300' r='10' fill='%239D4EDD' opacity='0.8'/%3E%3Cpath d='M270,340 C270,340 300,360 330,340' stroke='%239D4EDD' stroke-width='2' fill='none'/%3E%3Cpath d='M150,150 L450,150 L450,450 L150,450 Z' stroke='%239D4EDD' stroke-width='1' fill='none' opacity='0.3'/%3E%3Cpath d='M150,150 C150,150 200,100 300,100 C400,100 450,150 450,150' stroke='%239D4EDD' stroke-width='1' fill='none' opacity='0.3'/%3E%3Cpath d='M450,450 C450,450 400,500 300,500 C200,500 150,450 150,450' stroke='%239D4EDD' stroke-width='1' fill='none' opacity='0.3'/%3E%3Cpath d='M200,100 L300,50 L400,100' stroke='%239D4EDD' stroke-width='1' fill='none' opacity='0.3'/%3E%3Cpath d='M150,200 L100,300 L150,400' stroke='%239D4EDD' stroke-width='1' fill='none' opacity='0.3'/%3E%3Cpath d='M450,200 L500,300 L450,400' stroke='%239D4EDD' stroke-width='1' fill='none' opacity='0.3'/%3E%3Cline x1='0' y1='0' x2='600' y2='600' stroke='%239D4EDD' stroke-width='0.5' opacity='0.1'/%3E%3Cline x1='600' y1='0' x2='0' y2='600' stroke='%239D4EDD' stroke-width='0.5' opacity='0.1'/%3E%3C/svg%3E" alt="Chapter 1 - Image 1">
+                                </div>
+                            </div>
+                            
+                            <button class="carousel-control prev" onclick="moveCarousel('chapter1-carousel', 'prev')">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="carousel-control next" onclick="moveCarousel('chapter1-carousel', 'next')">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                            
+                            <div class="carousel-indicators" id="chapter1-indicators">
+                                <span class="indicator active" onclick="goToSlide('chapter1-carousel', 0)"></span>
+                            </div>
+                            
+                            <button class="add-image-btn" onclick="toggleImageUpload('chapter1-image-upload')">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        
+                        <div id="chapter1-image-upload" class="image-upload-container" style="display: none;">
+                            <p>Upload a new image for Chapter 1</p>
+                            <label for="chapter1-file">Choose File</label>
+                            <input type="file" id="chapter1-file" accept="image/*" onchange="addImageToCarousel(this, 'chapter1-carousel')">
+                        </div>
+                    </div>
+                    
+                    <!-- Text Container -->
+                    <div class="chapter-text-container">
+                        <div class="chapter-text view-mode" id="chapter1-text">
+                            <button class="edit-toggle" onclick="toggleEditMode('chapter1-text')">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            
+                            <!-- View Mode Content -->
+                            <div class="view-content">
+                                <div class="chapter-number">Chapter 1</div>
+                                <h3 class="chapter-title">Rise of the Neuronads</h3>
+                                <p class="chapter-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur autrules eros luttos or. Mam es faulia eofimuis uman. riuses eu lactes. Vjet riså uabt libero. aliquam accumsan dian, Vyste.</p>
+                                <a href="#chapter1" class="read-more">Read More</a>
+                            </div>
+                            
+                            <!-- Edit Mode Content -->
+                            <div class="edit-content">
+                                <div class="chapter-number">Chapter 1</div>
+                                <input type="text" class="chapter-title-input" value="Rise of the Neuronads">
+                                <textarea class="chapter-description-textarea">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur autrules eros luttos or. Mam es faulia eofimuis uman. riuses eu lactes. Vjet riså uabt libero. aliquam accumsan dian, Vyste.</textarea>
+                                <button class="save-button" onclick="saveChapterText('chapter1-text')">Save Changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Chapter 2 Row -->
+                <div class="chapter-row">
+                    <!-- Text Container -->
+                    <div class="chapter-text-container">
+                        <div class="chapter-text view-mode" id="chapter2-text">
+                            <button class="edit-toggle" onclick="toggleEditMode('chapter2-text')">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            
+                            <!-- View Mode Content -->
+                            <div class="view-content">
+                                <div class="chapter-number">Chapter 2</div>
+                                <h3 class="chapter-title">The Betrayal of the Insiders</h3>
+                                <p class="chapter-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <a href="#chapter2" class="read-more">Read More</a>
+                            </div>
+                            
+                            <!-- Edit Mode Content -->
+                            <div class="edit-content">
+                                <div class="chapter-number">Chapter 2</div>
+                                <input type="text" class="chapter-title-input" value="The Betrayal of the Insiders">
+                                <textarea class="chapter-description-textarea">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</textarea>
+                                <button class="save-button" onclick="saveChapterText('chapter2-text')">Save Changes</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Image Container -->
+                    <div class="chapter-image-container">
+                        <div class="chapter-image-carousel" id="chapter2-carousel">
+                            <div class="carousel-inner" id="chapter2-carousel-inner">
+                                <div class="carousel-item active">
+                                    <img class="chapter-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600' viewBox='0 0 600 600'%3E%3Crect width='600' height='600' fill='%230E0B24'/%3E%3Cpath d='M300,150 C150,150 150,450 300,450 C450,450 450,150 300,150 Z' fill='none' stroke='%23FF4D6D' stroke-width='1' opacity='0.3'/%3E%3Ccircle cx='300' cy='300' r='100' fill='%23FF4D6D' opacity='0.1'/%3E%3Cpath d='M250,250 L270,280 L240,280 Z' fill='%23FF4D6D' opacity='0.8'/%3E%3Cpath d='M350,250 L370,280 L340,280 Z' fill='%23FF4D6D' opacity='0.8'/%3E%3Cpath d='M270,340 C270,340 300,320 330,340' stroke='%23FF4D6D' stroke-width='2' fill='none'/%3E%3Cpath d='M150,150 L450,150 L450,450 L150,450 Z' stroke='%23FF4D6D' stroke-width='1' fill='none' opacity='0.3'/%3E%3Cpath d='M150,150 C150,150 200,100 300,100 C400,100 450,150 450,150' stroke='%23FF4D6D' stroke-width='1' fill='none' opacity='0.3'/%3E%3Cpath d='M450,450 C450,450 400,500 300,500 C200,500 150,450 150,450' stroke='%23FF4D6D' stroke-width='1' fill='none' opacity='0.3'/%3E%3Cpath d='M200,100 L300,50 L400,100' stroke='%23FF4D6D' stroke-width='1' fill='none' opacity='0.3'/%3E%3Cpath d='M150,200 L100,300 L150,400' stroke='%23FF4D6D' stroke-width='1' fill='none' opacity='0.3'/%3E%3Cpath d='M450,200 L500,300 L450,400' stroke='%23FF4D6D' stroke-width='1' fill='none' opacity='0.3'/%3E%3Cline x1='0' y1='0' x2='600' y2='600' stroke='%23FF4D6D' stroke-width='0.5' opacity='0.1'/%3E%3Cline x1='600' y1='0' x2='0' y2='600' stroke='%23FF4D6D' stroke-width='0.5' opacity='0.1'/%3E%3C/svg%3E" alt="Chapter 2 - Image 1">
+                                </div>
+                            </div>
+                            
+                            <button class="carousel-control prev" onclick="moveCarousel('chapter2-carousel', 'prev')">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="carousel-control next" onclick="moveCarousel('chapter2-carousel', 'next')">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                            
+                            <div class="carousel-indicators" id="chapter2-indicators">
+                                <span class="indicator active" onclick="goToSlide('chapter2-carousel', 0)"></span>
+                            </div>
+                            
+                            <button class="add-image-btn" onclick="toggleImageUpload('chapter2-image-upload')">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        
+                        <div id="chapter2-image-upload" class="image-upload-container" style="display: none;">
+                            <p>Upload a new image for Chapter 2</p>
+                            <label for="chapter2-file">Choose File</label>
+                            <input type="file" id="chapter2-file" accept="image/*" onchange="addImageToCarousel(this, 'chapter2-carousel')">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature Image (Large Middle Image) -->
+                <div class="feature-image-wrapper">
+                    <img class="feature-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='600' viewBox='0 0 1200 600'%3E%3Crect width='1200' height='600' fill='%230E0B24'/%3E%3Ccircle cx='600' cy='300' r='200' fill='%239D4EDD' opacity='0.1'/%3E%3Cpath d='M400,200 C400,200 500,150 600,150 C700,150 800,200 800,200 C900,250 900,350 800,400 C800,400 700,450 600,450 C500,450 400,400 400,400 C300,350 300,250 400,200 Z' stroke='%239D4EDD' stroke-width='2' fill='none' opacity='0.5'/%3E%3Cpath d='M600,150 L600,450' stroke='%239D4EDD' stroke-width='0.5' opacity='0.3'/%3E%3Cpath d='M400,200 L800,400 M800,200 L400,400' stroke='%239D4EDD' stroke-width='0.5' opacity='0.3'/%3E%3Ccircle cx='600' cy='300' r='150' stroke='%239D4EDD' stroke-width='1' fill='none' opacity='0.5'/%3E%3Ccircle cx='600' cy='300' r='100' stroke='%239D4EDD' stroke-width='0.5' fill='none' opacity='0.7'/%3E%3Ccircle cx='600' cy='300' r='50' stroke='%239D4EDD' stroke-width='2' fill='none'/%3E%3Ccircle cx='600' cy='300' r='20' fill='%239D4EDD' opacity='0.5'/%3E%3Cpath d='M300,100 L900,100 L900,500 L300,500 Z' stroke='%239D4EDD' stroke-width='1' fill='none' opacity='0.3'/%3E%3Cline x1='0' y1='0' x2='1200' y2='600' stroke='%239D4EDD' stroke-width='0.5' opacity='0.1'/%3E%3Cline x1='1200' y1='0' x2='0' y2='600' stroke='%239D4EDD' stroke-width='0.5' opacity='0.1'/%3E%3C/svg%3E" alt="Gateway Formation">
+                    <div class="feature-image-overlay">
+                        <div class="feature-text">The Gateway Formation</div>
+                    </div>
+                </div>
+                
+                <!-- Chapter 3 Row -->
+                <div class="chapter-row">
+                    <!-- Image Container -->
+                    <div class="chapter-image-container">
+                        <div class="chapter-image-carousel" id="chapter3-carousel">
+                            <div class="carousel-inner" id="chapter3-carousel-inner">
+                                <div class="carousel-item active">
+                                    <img class="chapter-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600' viewBox='0 0 600 600'%3E%3Crect width='600' height='600' fill='%230E0B24'/%3E%3Ccircle cx='300' cy='300' r='150' fill='%239D4EDD' opacity='0.1'/%3E%3Ccircle cx='300' cy='300' r='130' stroke='%239D4EDD' stroke-width='2' fill='none' opacity='0.3'/%3E%3Ccircle cx='300' cy='300' r='100' stroke='%239D4EDD' stroke-width='1' fill='none' opacity='0.5'/%3E%3Ccircle cx='300' cy='300' r='70' stroke='%239D4EDD' stroke-width='2' fill='none' opacity='0.7'/%3E%3Ccircle cx='300' cy='300' r='40' stroke='%239D4EDD' stroke-width='1' fill='none' opacity='0.9'/%3E%3Ccircle cx='300' cy='300' r='20' fill='%239D4EDD' opacity='0.5'/%3E%3Cpath d='M150,150 L450,150 L450,450 L150,450 Z' stroke='%239D4EDD' stroke-width='1' fill='none' opacity='0.3'/%3E%3Cpath d='M150,150 C150,150 200,100 300,100 C400,100 450,150 450,150' stroke='%239D4EDD' stroke-width='1' fill='none' opacity='0.3'/%3E%3Cpath d='M450,450 C450,450 400,500 300,500 C200,500 150,450 150,450' stroke='%239D4EDD' stroke-width='1' fill='none' opacity='0.3'/%3E%3Cline x1='0' y1='0' x2='600' y2='600' stroke='%239D4EDD' stroke-width='0.5' opacity='0.1'/%3E%3Cline x1='600' y1='0' x2='0' y2='600' stroke='%239D4EDD' stroke-width='0.5' opacity='0.1'/%3E%3C/svg%3E" alt="Chapter 3 - Image 1">
+                                </div>
+                            </div>
+                            
+                            <button class="carousel-control prev" onclick="moveCarousel('chapter3-carousel', 'prev')">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="carousel-control next" onclick="moveCarousel('chapter3-carousel', 'next')">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                            
+                            <div class="carousel-indicators" id="chapter3-indicators">
+                                <span class="indicator active" onclick="goToSlide('chapter3-carousel', 0)"></span>
+                            </div>
+                            
+                            <button class="add-image-btn" onclick="toggleImageUpload('chapter3-image-upload')">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        
+                        <div id="chapter3-image-upload" class="image-upload-container" style="display: none;">
+                            <p>Upload a new image for Chapter 3</p>
+                            <label for="chapter3-file">Choose File</label>
+                            <input type="file" id="chapter3-file" accept="image/*" onchange="addImageToCarousel(this, 'chapter3-carousel')">
+                        </div>
+                    </div>
+                    
+                    <!-- Text Container -->
+                    <div class="chapter-text-container">
+                        <div class="chapter-text view-mode" id="chapter3-text">
+                            <button class="edit-toggle" onclick="toggleEditMode('chapter3-text')">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            
+                            <!-- View Mode Content -->
+                            <div class="view-content">
+                                <div class="chapter-number">Chapter 3</div>
+                                <h3 class="chapter-title">The Gateway Formation</h3>
+                                <p class="chapter-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lmd ulline us utrium.</p>
+                                <a href="#chapter3" class="read-more">Read More</a>
+                            </div>
+                            
+                            <!-- Edit Mode Content -->
+                            <div class="edit-content">
+                                <div class="chapter-number">Chapter 3</div>
+                                <input type="text" class="chapter-title-input" value="The Gateway Formation">
+                                <textarea class="chapter-description-textarea">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lmd ulline us utrium.</textarea>
+                                <button class="save-button" onclick="saveChapterText('chapter3-text')">Save Changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Information Section -->
+            <div class="info-section view-mode" id="info-section">
+                <button class="edit-info-toggle" onclick="toggleInfoEditMode()">
+                    <i class="fas fa-edit"></i>
+                </button>
+                
+                <!-- View Mode Content -->
+                <div class="view-info-content">
+                    <h2 class="info-heading">About NEURONADS</h2>
+                    
+                    <div class="info-content">
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="info-text">
+                                <h3 class="info-title">The Story</h3>
+                                <p class="info-description">In the vast expanse of the Blockchain Galaxy exists an ancient, advanced alien species known as the Neuronads. For millennia, they have served as the guardians of cosmic order, security, and decentralization across countless digital worlds.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-gem"></i>
+                            </div>
+                            <div class="info-text">
+                                <h3 class="info-title">Cosmic Stones</h3>
+                                <p class="info-description">The cosmic stones are the most coveted treasures in the galaxy. Each stone possesses unique properties and energy signatures, capable of powering advanced technology independently. However, their true potential is realized when combined.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div class="info-text">
+                                <h3 class="info-title">Planet Monad</h3>
+                                <p class="info-description">Monad is unlike any planet ever encountered—a massive world pulsing with vibrant purple energy that forms the very building blocks of its reality. This energy is incredibly potent, easy to extract, and regenerates at speeds defying conventional physics.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Edit Mode Content -->
+                <div class="edit-info-content">
+                    <h2 class="info-heading">Edit Information</h2>
+                    
+                    <div class="info-content" id="editable-info-content">
+                        <div class="info-item" id="info-item-1">
+                            <div class="info-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="info-text">
+                                <input type="text" class="info-title-input" value="The Story">
+                                <textarea class="info-description-textarea">In the vast expanse of the Blockchain Galaxy exists an ancient, advanced alien species known as the Neuronads. For millennia, they have served as the guardians of cosmic order, security, and decentralization across countless digital worlds.</textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item" id="info-item-2">
+                            <div class="info-icon">
+                                <i class="fas fa-gem"></i>
+                            </div>
+                            <div class="info-text">
+                                <input type="text" class="info-title-input" value="Cosmic Stones">
+                                <textarea class="info-description-textarea">The cosmic stones are the most coveted treasures in the galaxy. Each stone possesses unique properties and energy signatures, capable of powering advanced technology independently. However, their true potential is realized when combined.</textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item" id="info-item-3">
+                            <div class="info-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div class="info-text">
+                                <input type="text" class="info-title-input" value="Planet Monad">
+                                <textarea class="info-description-textarea">Monad is unlike any planet ever encountered—a massive world pulsing with vibrant purple energy that forms the very building blocks of its reality. This energy is incredibly potent, easy to extract, and regenerates at speeds defying conventional physics.</textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="add-info-item" onclick="addInfoItem()">
+                            <i class="fas fa-plus"></i> Add New Information
+                        </div>
+                    </div>
+                    
+                    <button class="save-info-button" onclick="saveInfoChanges()">Save All Changes</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <div class="scroll-indicator" id="scrollIndicator" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <script>
+        // Generate the tall, scrolling space background
+        function generateSpaceBackground() {
+            const spaceBg = document.getElementById('infiniteSpaceBg');
+            
+            // Create a tall SVG for the top half
+            const topSpaceSVG = `
+<svg xmlns="http://www.w3.org/2000/svg" width="2560" height="25600" viewBox="0 0 2560 25600">
+    <defs>
+        <radialGradient id="starGlow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+            <stop offset="0%" stop-color="#B964F7" stop-opacity="0.8"/>
+            <stop offset="100%" stop-color="#B964F7" stop-opacity="0"/>
+        </radialGradient>
+    </defs>
+    <rect width="2560" height="25600" fill="#0E0B24"/>
+    
+    <!-- Background Nebulae -->
+    ${Array(30).fill().map(() => {
+        const x = Math.random() * 2560;
+        const y = Math.random() * 25600;
+        const radius = Math.random() * 500 + 200;
+        const opacity = Math.random() * 0.2 + 0.05;
+        return `<circle cx="${x}" cy="${y}" r="${radius}" fill="#9D4EDD" fill-opacity="${opacity}"/>`;
+    }).join('')}
+    
+    <!-- Stars - Small -->
+    ${Array(2000).fill().map(() => {
+        const x = Math.random() * 2560;
+        const y = Math.random() * 25600;
+        const radius = Math.random() * 1.5 + 0.5;
+        const opacity = Math.random() * 0.8 + 0.2;
+        return `<circle cx="${x}" cy="${y}" r="${radius}" fill="white" fill-opacity="${opacity}"/>`;
+    }).join('')}
+    
+    <!-- Stars - Medium -->
+    ${Array(500).fill().map(() => {
+        const x = Math.random() * 2560;
+        const y = Math.random() * 25600;
+        const radius = Math.random() * 2 + 1;
+        const opacity = Math.random() * 0.9 + 0.1;
+        return `<circle cx="${x}" cy="${y}" r="${radius}" fill="white" fill-opacity="${opacity}"/>`;
+    }).join('')}
+    
+    <!-- Stars - Large -->
+    ${Array(100).fill().map(() => {
+        const x = Math.random() * 2560;
+        const y = Math.random() * 25600;
+        const radius = Math.random() * 3 + 2;
+        return `<circle cx="${x}" cy="${y}" r="${radius}" fill="white"/>
+                <circle cx="${x}" cy="${y}" r="${radius * 3}" fill="url(#starGlow)"/>`;
+    }).join('')}
+    
+    <!-- Purple Stars -->
+    ${Array(150).fill().map(() => {
+        const x = Math.random() * 2560;
+        const y = Math.random() * 25600;
+        const radius = Math.random() * 2.5 + 1.5;
+        return `<circle cx="${x}" cy="${y}" r="${radius}" fill="#B964F7"/>
+                <circle cx="${x}" cy="${y}" r="${radius * 4}" fill="url(#starGlow)"/>`;
+    }).join('')}
+    
+    <!-- Constellation Lines -->
+    ${Array(30).fill().map(() => {
+        const x1 = Math.random() * 2560;
+        const y1 = Math.random() * 25600;
+        const x2 = x1 + (Math.random() * 400 - 200);
+        const y2 = y1 + (Math.random() * 400 - 200);
+        return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#9D4EDD" stroke-width="0.5" stroke-opacity="0.3"/>`;
+    }).join('')}
+    
+    <!-- Distant Galaxies -->
+    ${Array(15).fill().map(() => {
+        const cx = Math.random() * 2560;
+        const cy = Math.random() * 25600;
+        const rx = Math.random() * 100 + 50;
+        const ry = Math.random() * 40 + 20;
+        const opacity = Math.random() * 0.15 + 0.05;
+        const rotation = Math.random() * 360;
+        return `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" transform="rotate(${rotation} ${cx} ${cy})" fill="#9D4EDD" fill-opacity="${opacity}"/>`;
+    }).join('')}
+    
+    <!-- Make the bottom match up with the top for seamless looping -->
+    <!-- Additional stars at the bottom edge that match the top of the image -->
+    ${Array(200).fill().map((_, i) => {
+        const x = (i / 200) * 2560;
+        const y1 = 25500; // near bottom
+        const y2 = 100; // near top
+        const radius = Math.random() * 2 + 0.5;
+        return `<circle cx="${x}" cy="${y1}" r="${radius}" fill="white"/>
+                <circle cx="${x}" cy="${y2}" r="${radius}" fill="white"/>`;
+    }).join('')}
+</svg>`;
+            
+            const dataUrl = 'data:image/svg+xml;base64,' + btoa(topSpaceSVG);
+            spaceBg.style.backgroundImage = `url("${dataUrl}")`;
+        }
+        
+        // Show loading bar
+        const loadingBar = document.getElementById('loadingBar');
+        let loadWidth = 0;
+        const loadingInterval = setInterval(() => {
+            loadWidth += 5;
+            loadingBar.style.width = loadWidth + '%';
+            
+            if (loadWidth >= 100) {
+                clearInterval(loadingInterval);
+                setTimeout(() => {
+                    loadingBar.style.opacity = '0';
+                }, 500);
+            }
+        }, 50);
+        
+        // Create stars in the background
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starsCount = Math.floor(window.innerWidth * window.innerHeight / 1000);
+            
+            for (let i = 0; i < starsCount; i++) {
+                const star = document.createElement('div');
+                const size = Math.random() * 2;
+                
+                star.style.position = 'absolute';
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.backgroundColor = 'white';
+                star.style.borderRadius = '50%';
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.opacity = Math.random() * 0.8;
+                star.style.animation = `twinkle ${Math.random() * 3 + 2}s ease-in-out infinite alternate`;
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                
+                starsContainer.appendChild(star);
+            }
+            
+            // Add some larger purple stars/nebulae
+            for (let i = 0; i < 10; i++) {
+                const nebula = document.createElement('div');
+                const size = Math.random() * 4 + 2;
+                
+                nebula.style.position = 'absolute';
+                nebula.style.width = `${size}px`;
+                nebula.style.height = `${size}px`;
+                nebula.style.backgroundColor = 'var(--neon-purple-light)';
+                nebula.style.borderRadius = '50%';
+                nebula.style.left = `${Math.random() * 100}%`;
+                nebula.style.top = `${Math.random() * 100}%`;
+                nebula.style.opacity = Math.random() * 0.5;
+                nebula.style.boxShadow = '0 0 10px var(--neon-purple-light)';
+                nebula.style.animation = `pulse ${Math.random() * 4 + 3}s ease-in-out infinite alternate`;
+                nebula.style.animationDelay = `${Math.random() * 5}s`;
+                
+                starsContainer.appendChild(nebula);
+            }
+        }
+        
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random starting position
+                const x = Math.random() * 100;
+                const y = Math.random() * 100 + 100; // Start from below
+                
+                // Random size
+                const size = Math.random() * 3 + 1;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${x}%`;
+                particle.style.top = `${y}%`;
+                
+                // Random animation duration and delay
+                const duration = Math.random() * 10 + 10;
+                const delay = Math.random() * 5;
+                
+                particle.style.animation = `floatParticle ${duration}s linear infinite`;
+                particle.style.animationDelay = `-${delay}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Neural network background effect
+        function createNeuralNetwork() {
+            const canvas = document.getElementById('neuralNetwork');
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            const nodes = [];
+            const nodeCount = 30;
+            const connectionRadius = 100;
+            
+            // Resize canvas to window size
+            function resizeCanvas() {
+                width = window.innerWidth;
+                height = window.innerHeight;
+                canvas.width = width;
+                canvas.height = height;
+            }
+            
+            // Create nodes
+            function createNodes() {
+                nodes.length = 0;
+                for (let i = 0; i < nodeCount; i++) {
+                    nodes.push({
+                        x: Math.random() * width,
+                        y: Math.random() * height,
+                        vx: (Math.random() - 0.5) * 0.5,
+                        vy: (Math.random() - 0.5) * 0.5,
+                        radius: Math.random() * 2 + 1
+                    });
+                }
+            }
+            
+            // Draw the neural network
+            function drawNetwork() {
+                ctx.clearRect(0, 0, width, height);
+                
+                // Update node positions
+                for (let i = 0; i < nodeCount; i++) {
+                    const node = nodes[i];
+                    
+                    // Move node
+                    node.x += node.vx;
+                    node.y += node.vy;
+                    
+                    // Bounce off edges
+                    if (node.x < 0 || node.x > width) node.vx *= -1;
+                    if (node.y < 0 || node.y > height) node.vy *= -1;
+                    
+                    // Draw node
+                    ctx.beginPath();
+                    ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(157, 78, 221, 0.5)';
+                    ctx.fill();
+                    
+                    // Draw connections
+                    for (let j = i + 1; j < nodeCount; j++) {
+                        const otherNode = nodes[j];
+                        const dx = otherNode.x - node.x;
+                        const dy = otherNode.y - node.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < connectionRadius) {
+                            ctx.beginPath();
+                            ctx.moveTo(node.x, node.y);
+                            ctx.lineTo(otherNode.x, otherNode.y);
+                            const opacity = 1 - distance / connectionRadius;
+                            ctx.strokeStyle = `rgba(157, 78, 221, ${opacity * 0.2})`;
+                            ctx.lineWidth = 1;
+                            ctx.stroke();
+                        }
+                    }
+                }
+                
+                requestAnimationFrame(drawNetwork);
+            }
+            
+            // Initialize
+            resizeCanvas();
+            createNodes();
+            drawNetwork();
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+                createNodes();
+            });
+        }
+        
+        // Navigation active state
+        function initNavigation() {
+            const navLinks = document.querySelectorAll('nav a');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                });
+            });
+        }
+        
+        // Scroll animations
+        function initScrollAnimations() {
+            const chapterRows = document.querySelectorAll('.chapter-row');
+            const featureImage = document.querySelector('.feature-image-wrapper');
+            const infoSection = document.querySelector('.info-section');
+            const scrollIndicator = document.getElementById('scrollIndicator');
+            
+            function checkScroll() {
+                const scrollPos = window.scrollY + window.innerHeight * 0.8;
+                
+                chapterRows.forEach(row => {
+                    if (row.offsetTop < scrollPos) {
+                        row.classList.add('visible');
+                    }
+                });
+                
+                if (featureImage.offsetTop < scrollPos) {
+                    featureImage.classList.add('visible');
+                }
+                
+                if (infoSection.offsetTop < scrollPos) {
+                    infoSection.classList.add('visible');
+                }
+                
+                // Show/hide scroll-to-top
+                if (window.scrollY > window.innerHeight) {
+                    scrollIndicator.classList.add('visible');
+                } else {
+                    scrollIndicator.classList.remove('visible');
+                }
+            }
+            
+            // Check scroll position on load
+            checkScroll();
+            
+            // Add scroll event listener
+            window.addEventListener('scroll', checkScroll);
+        }
+        
+        // Scroll to top
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Toggle edit mode for chapter text
+        function toggleEditMode(elementId) {
+            const element = document.getElementById(elementId);
+            if (element.classList.contains('view-mode')) {
+                element.classList.remove('view-mode');
+                element.classList.add('edit-mode');
+            } else {
+                element.classList.remove('edit-mode');
+                element.classList.add('view-mode');
+            }
+        }
+        
+        // Save chapter text changes
+        function saveChapterText(elementId) {
+            const element = document.getElementById(elementId);
+            const titleInput = element.querySelector('.chapter-title-input');
+            const descriptionTextarea = element.querySelector('.chapter-description-textarea');
+            const titleElement = element.querySelector('.view-content .chapter-title');
+            const descriptionElement = element.querySelector('.view-content .chapter-description');
+            
+            // Update the content
+            titleElement.textContent = titleInput.value;
+            descriptionElement.textContent = descriptionTextarea.value;
+            
+            // Switch back to view mode
+            element.classList.remove('edit-mode');
+            element.classList.add('view-mode');
+        }
+        
+        // Toggle image upload container
+        function toggleImageUpload(elementId) {
+            const element = document.getElementById(elementId);
+            if (element.style.display === 'none') {
+                element.style.display = 'flex';
+            } else {
+                element.style.display = 'none';
+            }
+        }
+        
+        // Add an image to the carousel
+        function addImageToCarousel(input, carouselId) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                const carousel = document.getElementById(carouselId);
+                const carouselInner = carousel.querySelector('.carousel-inner');
+                const indicators = carousel.querySelector('.carousel-indicators');
+                
+                reader.onload = function(e) {
+                    // Get the current number of slides
+                    const slideCount = carouselInner.querySelectorAll('.carousel-item').length;
+                    
+                    // Create new carousel item
+                    const newItem = document.createElement('div');
+                    newItem.className = 'carousel-item';
+                    newItem.innerHTML = `<img class="chapter-image" src="${e.target.result}" alt="Chapter Image ${slideCount + 1}">`;
+                    
+                    // Add the new item to the carousel
+                    carouselInner.appendChild(newItem);
+                    
+                    // Create new indicator
+                    const newIndicator = document.createElement('span');
+                    newIndicator.className = 'indicator';
+                    newIndicator.onclick = function() { goToSlide(carouselId, slideCount); };
+                    
+                    // Add the new indicator
+                    indicators.appendChild(newIndicator);
+                    
+                    // Navigate to the new slide
+                    goToSlide(carouselId, slideCount);
+                    
+                    // Hide the upload container
+                    input.parentElement.style.display = 'none';
+                }
+                
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        
+        // Carousel navigation
+        function moveCarousel(carouselId, direction) {
+            const carousel = document.getElementById(carouselId);
+            const carouselInner = carousel.querySelector('.carousel-inner');
+            const items = carousel.querySelectorAll('.carousel-item');
+            
+            if (items.length <= 1) return;
+            
+            // Find the active item
+            let activeIndex = 0;
+            items.forEach((item, index) => {
+                if (item.classList.contains('active')) {
+                    activeIndex = index;
+                }
+            });
+            
+            // Calculate the next index
+            let nextIndex;
+            if (direction === 'next') {
+                nextIndex = (activeIndex + 1) % items.length;
+            } else {
+                nextIndex = (activeIndex - 1 + items.length) % items.length;
+            }
+            
+            goToSlide(carouselId, nextIndex);
+        }
+        
+        // Go to a specific slide
+        function goToSlide(carouselId, index) {
+            const carousel = document.getElementById(carouselId);
+            const carouselInner = carousel.querySelector('.carousel-inner');
+            const items = carousel.querySelectorAll('.carousel-item');
+            const indicators = carousel.querySelectorAll('.indicator');
+            
+            if (items.length <= 1) return;
+            
+            // Remove active class from all items and indicators
+            items.forEach(item => item.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            // Add active class to the target item and indicator
+            items[index].classList.add('active');
+            indicators[index].classList.add('active');
+            
+            // Translate the carousel inner
+            carouselInner.style.transform = `translateX(-${index * 100}%)`;
+        }
+        
+        // Toggle info section edit mode
+        function toggleInfoEditMode() {
+            const infoSection = document.getElementById('info-section');
+            if (infoSection.classList.contains('view-mode')) {
+                infoSection.classList.remove('view-mode');
+                infoSection.classList.add('edit-mode');
+            } else {
+                infoSection.classList.remove('edit-mode');
+                infoSection.classList.add('view-mode');
+            }
+        }
+        
+        // Add a new info item
+        function addInfoItem() {
+            const infoContent = document.getElementById('editable-info-content');
+            const infoItems = infoContent.querySelectorAll('.info-item');
+            const newIndex = infoItems.length + 1;
+            
+            // Create a new info item
+            const newItem = document.createElement('div');
+            newItem.className = 'info-item';
+            newItem.id = `info-item-${newIndex}`;
+            
+            // Icons to choose from
+            const icons = [
+                'fa-book', 'fa-gem', 'fa-globe', 'fa-star', 'fa-bolt', 
+                'fa-rocket', 'fa-cog', 'fa-users', 'fa-key', 'fa-shield-alt'
+            ];
+            
+            // Randomly select an icon
+            const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+            
+            newItem.innerHTML = `
+                <div class="info-icon">
+                    <i class="fas ${randomIcon}"></i>
+                </div>
+                <div class="info-text">
+                    <input type="text" class="info-title-input" value="New Information">
+                    <textarea class="info-description-textarea">Add your description here...</textarea>
+                </div>
+            `;
+            
+            // Insert the new item before the "Add New" button
+            const addButton = infoContent.querySelector('.add-info-item');
+            infoContent.insertBefore(newItem, addButton);
+        }
+        
+        // Save info section changes
+        function saveInfoChanges() {
+            const infoSection = document.getElementById('info-section');
+            const editableItems = infoSection.querySelectorAll('.edit-info-content .info-item');
+            const viewInfoContent = infoSection.querySelector('.view-info-content .info-content');
+            
+            // Clear the current view content
+            viewInfoContent.innerHTML = '';
+            
+            // For each editable item, create a corresponding view item
+            editableItems.forEach(item => {
+                const icon = item.querySelector('.info-icon i').className;
+                const title = item.querySelector('.info-title-input').value;
+                const description = item.querySelector('.info-description-textarea').value;
+                
+                const newViewItem = document.createElement('div');
+                newViewItem.className = 'info-item';
+                newViewItem.innerHTML = `
+                    <div class="info-icon">
+                        <i class="${icon}"></i>
+                    </div>
+                    <div class="info-text">
+                        <h3 class="info-title">${title}</h3>
+                        <p class="info-description">${description}</p>
+                    </div>
+                `;
+                
+                viewInfoContent.appendChild(newViewItem);
+            });
+            
+            // Switch back to view mode
+            infoSection.classList.remove('edit-mode');
+            infoSection.classList.add('view-mode');
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            generateSpaceBackground(); // Generate the tall scrolling space background
+            createStars();
+            createParticles();
+            createNeuralNetwork();
+            initNavigation();
+            initScrollAnimations();
+        });
+    </script>
+</body>
+</html>
