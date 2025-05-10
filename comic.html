@@ -291,7 +291,7 @@
         
         .comic-banner {
             width: 100%;
-            height: 300px;
+            height: 450px; /* Increased height for taller banners */
             position: relative;
             border-radius: 15px;
             overflow: hidden;
@@ -313,13 +313,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(6, 5, 26, 0.9) 0%, rgba(6, 5, 26, 0.5) 30%, rgba(6, 5, 26, 0.2) 60%, rgba(6, 5, 26, 0.7) 100%);
+            background: linear-gradient(to bottom, rgba(6, 5, 26, 0.9) 0%, rgba(6, 5, 26, 0.5) 20%, rgba(6, 5, 26, 0.2) 40%, rgba(6, 5, 26, 0.5) 80%, rgba(6, 5, 26, 0.7) 100%);
             pointer-events: none;
             z-index: 1;
         }
         
         .comic-banner:hover::after {
-            background: linear-gradient(to bottom, rgba(6, 5, 26, 0.8) 0%, rgba(6, 5, 26, 0.4) 30%, rgba(6, 5, 26, 0.1) 60%, rgba(6, 5, 26, 0.6) 100%);
+            background: linear-gradient(to bottom, rgba(6, 5, 26, 0.8) 0%, rgba(6, 5, 26, 0.4) 20%, rgba(6, 5, 26, 0.1) 40%, rgba(6, 5, 26, 0.4) 80%, rgba(6, 5, 26, 0.6) 100%);
         }
         
         .banner-image {
@@ -534,147 +534,6 @@
             filter: blur(1px);
         }
         
-        /* Code for admin editor (hidden by default) */
-        .admin-button {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background-color: rgba(6, 5, 26, 0.7);
-            border: 1px solid var(--neon-purple);
-            border-radius: 50%;
-            color: var(--neon-purple-light);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.5rem;
-            cursor: pointer;
-            z-index: 100;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(6, 5, 26, 0.5);
-        }
-        
-        .admin-button:hover {
-            background-color: var(--neon-purple);
-            color: white;
-            transform: rotate(90deg);
-            box-shadow: 0 5px 20px rgba(157, 78, 221, 0.5);
-        }
-        
-        .admin-panel {
-            position: fixed;
-            bottom: 100px;
-            right: 30px;
-            width: 350px;
-            background-color: var(--deeper-blue);
-            border: 1px solid var(--neon-purple);
-            border-radius: 10px;
-            padding: 20px;
-            z-index: 100;
-            transform: translateY(20px);
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(6, 5, 26, 0.7);
-        }
-        
-        .admin-panel.active {
-            transform: translateY(0);
-            opacity: 1;
-            pointer-events: auto;
-        }
-        
-        .admin-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            color: var(--neon-purple-light);
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .admin-close {
-            background: none;
-            border: none;
-            color: var(--text-color);
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .admin-close:hover {
-            color: var(--neon-purple-light);
-            transform: rotate(90deg);
-        }
-        
-        .admin-field {
-            margin-bottom: 15px;
-        }
-        
-        .admin-label {
-            display: block;
-            font-size: 0.9rem;
-            color: var(--text-color);
-            margin-bottom: 5px;
-        }
-        
-        .admin-input, .admin-textarea {
-            width: 100%;
-            padding: 10px;
-            background-color: rgba(6, 5, 26, 0.5);
-            border: 1px solid var(--neon-purple);
-            border-radius: 5px;
-            color: var(--text-color);
-            font-size: 0.9rem;
-            font-family: 'Chakra Petch', sans-serif;
-        }
-        
-        .admin-textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-        
-        .admin-buttons {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        
-        .admin-save, .admin-cancel {
-            padding: 8px 15px;
-            border-radius: 5px;
-            font-family: 'Chakra Petch', sans-serif;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .admin-save {
-            background-color: var(--neon-purple);
-            color: white;
-            border: none;
-        }
-        
-        .admin-save:hover {
-            background-color: var(--neon-purple-light);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 10px rgba(157, 78, 221, 0.3);
-        }
-        
-        .admin-cancel {
-            background-color: transparent;
-            color: var(--text-color);
-            border: 1px solid var(--text-color);
-        }
-        
-        .admin-cancel:hover {
-            background-color: rgba(200, 216, 228, 0.1);
-            transform: translateY(-3px);
-        }
-        
         /* Comic Reader Modal */
         .comic-reader-modal {
             position: fixed;
@@ -830,7 +689,7 @@
             }
             
             .comic-banner {
-                height: 250px;
+                height: 400px;
             }
             
             .summary-text {
@@ -852,7 +711,7 @@
             }
             
             .comic-banner {
-                height: 220px;
+                height: 350px;
             }
             
             .comic-info {
@@ -889,12 +748,6 @@
                 display: none;
             }
             
-            .admin-panel {
-                width: 90%;
-                right: 5%;
-                left: 5%;
-            }
-            
             .comic-reader-title {
                 font-size: 1.2rem;
             }
@@ -924,7 +777,7 @@
             }
             
             .comic-banner {
-                height: 180px;
+                height: 300px;
             }
             
             .comic-info {
@@ -949,12 +802,6 @@
                 right: 15px;
                 padding: 5px 10px;
                 font-size: 0.8rem;
-            }
-            
-            .admin-button {
-                width: 50px;
-                height: 50px;
-                font-size: 1.2rem;
             }
             
             .comic-navigation-controls {
@@ -1133,46 +980,6 @@
         </main>
     </div>
     
-    <!-- Admin Button (only visible to you) -->
-    <div class="admin-button" id="adminButton">
-        <i class="fas fa-cog"></i>
-    </div>
-    
-    <!-- Admin Panel for adding new comics (hidden by default) -->
-    <div class="admin-panel" id="adminPanel">
-        <div class="admin-title">
-            Add New Comic Chapter
-            <button class="admin-close" id="adminClose">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        
-        <div class="admin-field">
-            <label class="admin-label">Chapter Number</label>
-            <input type="number" class="admin-input" id="chapterNumber" placeholder="e.g., 1">
-        </div>
-        
-        <div class="admin-field">
-            <label class="admin-label">Chapter Title</label>
-            <input type="text" class="admin-input" id="chapterTitle" placeholder="e.g., Rise of the Neuronads">
-        </div>
-        
-        <div class="admin-field">
-            <label class="admin-label">Chapter Summary</label>
-            <textarea class="admin-textarea" id="chapterSummary" placeholder="Brief description of this chapter..."></textarea>
-        </div>
-        
-        <div class="admin-field">
-            <label class="admin-label">Banner Image URL</label>
-            <input type="text" class="admin-input" id="bannerUrl" placeholder="URL to the banner image">
-        </div>
-        
-        <div class="admin-buttons">
-            <button class="admin-cancel" id="adminCancelBtn">Cancel</button>
-            <button class="admin-save" id="adminSaveBtn">Save Chapter</button>
-        </div>
-    </div>
-    
     <!-- Comic Reader Modal -->
     <div class="comic-reader-modal" id="comicReaderModal">
         <div class="comic-reader-header">
@@ -1201,7 +1008,7 @@
     
     <script>
         // ============ COMIC DATA (EDIT THIS SECTION TO ADD NEW CHAPTERS) ============
-        // This array contains all comic chapters. Add new chapters here.
+        // This array contains all comic chapters. To add a new chapter, add a new object to this array.
         const comicChaptersData = [
             {
                 id: 1,
@@ -1209,7 +1016,7 @@
                 title: "Rise of the Neuronads",
                 summary: "In the vast expanse of the digital universe, the Neuronads emerge as guardians of the blockchain, defending against the chaotic forces that threaten to corrupt the network.",
                 date: "May 1, 2025",
-                bannerImage: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='400' viewBox='0 0 1200 400'%3E%3Crect width='1200' height='400' fill='%230E0B24'/%3E%3Ccircle cx='300' cy='200' r='100' fill='%239D4EDD' opacity='0.2'/%3E%3Ccircle cx='700' cy='250' r='150' fill='%239D4EDD' opacity='0.1'/%3E%3Cpath d='M200,100 C200,100 400,50 600,100 C800,150 1000,100 1000,100' stroke='%239D4EDD' stroke-width='1' fill='none' opacity='0.3'/%3E%3Cpath d='M0,300 C0,300 200,350 400,300 C600,250 800,350 1000,300 C1200,250 1200,300 1200,300' stroke='%239D4EDD' stroke-width='1' fill='none' opacity='0.3'/%3E%3Ccircle cx='300' cy='160' r='5' fill='%239D4EDD' opacity='0.8'/%3E%3Ccircle cx='260' cy='200' r='5' fill='%239D4EDD' opacity='0.8'/%3E%3Ccircle cx='340' cy='200' r='5' fill='%239D4EDD' opacity='0.8'/%3E%3Cpath d='M270,240 C270,240 300,260 330,240' stroke='%239D4EDD' stroke-width='2' fill='none'/%3E%3Ccircle cx='700' cy='200' r='50' stroke='%239D4EDD' stroke-width='1' fill='none' opacity='0.5'/%3E%3Ccircle cx='700' cy='200' r='30' stroke='%239D4EDD' stroke-width='0.5' fill='none' opacity='0.7'/%3E%3Ccircle cx='700' cy='200' r='10' stroke='%239D4EDD' stroke-width='1' fill='none' opacity='0.9'/%3E%3C/svg%3E",
+                bannerImage: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='600' viewBox='0 0 1200 600'%3E%3Crect width='1200' height='600' fill='%230E0B24'/%3E%3Ccircle cx='300' cy='300' r='120' fill='%239D4EDD' opacity='0.2'/%3E%3Ccircle cx='700' cy='400' r='180' fill='%239D4EDD' opacity='0.1'/%3E%3Cpath d='M200,150 C200,150 400,50 600,100 C800,150 1000,100 1000,100' stroke='%239D4EDD' stroke-width='1' fill='none' opacity='0.3'/%3E%3Cpath d='M0,450 C0,450 200,500 400,450 C600,400 800,500 1000,450 C1200,400 1200,450 1200,450' stroke='%239D4EDD' stroke-width='1' fill='none' opacity='0.3'/%3E%3Ccircle cx='300' cy='220' r='8' fill='%239D4EDD' opacity='0.8'/%3E%3Ccircle cx='250' cy='300' r='8' fill='%239D4EDD' opacity='0.8'/%3E%3Ccircle cx='350' cy='300' r='8' fill='%239D4EDD' opacity='0.8'/%3E%3Cpath d='M270,360 C270,360 300,380 330,360' stroke='%239D4EDD' stroke-width='2' fill='none'/%3E%3Ccircle cx='700' cy='300' r='80' stroke='%239D4EDD' stroke-width='1' fill='none' opacity='0.5'/%3E%3Ccircle cx='700' cy='300' r='50' stroke='%239D4EDD' stroke-width='0.5' fill='none' opacity='0.7'/%3E%3Ccircle cx='700' cy='300' r='20' stroke='%239D4EDD' stroke-width='1' fill='none' opacity='0.9'/%3E%3C/svg%3E",
                 isNew: true,
                 // Comic pages - Add your actual comic pages here
                 pages: [
@@ -1225,7 +1032,7 @@
                 title: "The Betrayal of the Insiders",
                 summary: "A shocking betrayal from within the ranks of the Neuronads threatens the stability of the entire system. Can the remaining guardians maintain order?",
                 date: "May 8, 2025",
-                bannerImage: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='400' viewBox='0 0 1200 400'%3E%3Crect width='1200' height='400' fill='%230E0B24'/%3E%3Ccircle cx='300' cy='200' r='100' fill='%23FF4D6D' opacity='0.2'/%3E%3Ccircle cx='700' cy='250' r='150' fill='%23FF4D6D' opacity='0.1'/%3E%3Cpath d='M200,100 C200,100 400,50 600,100 C800,150 1000,100 1000,100' stroke='%23FF4D6D' stroke-width='1' fill='none' opacity='0.3'/%3E%3Cpath d='M0,300 C0,300 200,350 400,300 C600,250 800,350 1000,300 C1200,250 1200,300 1200,300' stroke='%23FF4D6D' stroke-width='1' fill='none' opacity='0.3'/%3E%3Cpath d='M250,180 L270,210 L240,210 Z' fill='%23FF4D6D' opacity='0.8'/%3E%3Cpath d='M350,180 L370,210 L340,210 Z' fill='%23FF4D6D' opacity='0.8'/%3E%3Cpath d='M270,240 C270,240 300,220 330,240' stroke='%23FF4D6D' stroke-width='2' fill='none'/%3E%3Ccircle cx='700' cy='200' r='50' stroke='%23FF4D6D' stroke-width='1' fill='none' opacity='0.5'/%3E%3Ccircle cx='700' cy='200' r='30' stroke='%23FF4D6D' stroke-width='0.5' fill='none' opacity='0.7'/%3E%3Ccircle cx='700' cy='200' r='10' stroke='%23FF4D6D' stroke-width='1' fill='none' opacity='0.9'/%3E%3C/svg%3E",
+                bannerImage: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='600' viewBox='0 0 1200 600'%3E%3Crect width='1200' height='600' fill='%230E0B24'/%3E%3Ccircle cx='300' cy='300' r='120' fill='%23FF4D6D' opacity='0.2'/%3E%3Ccircle cx='700' cy='400' r='180' fill='%23FF4D6D' opacity='0.1'/%3E%3Cpath d='M200,150 C200,150 400,50 600,100 C800,150 1000,100 1000,100' stroke='%23FF4D6D' stroke-width='1' fill='none' opacity='0.3'/%3E%3Cpath d='M0,450 C0,450 200,500 400,450 C600,400 800,500 1000,450 C1200,400 1200,450 1200,450' stroke='%23FF4D6D' stroke-width='1' fill='none' opacity='0.3'/%3E%3Cpath d='M250,260 L270,290 L240,290 Z' fill='%23FF4D6D' opacity='0.8'/%3E%3Cpath d='M350,260 L370,290 L340,290 Z' fill='%23FF4D6D' opacity='0.8'/%3E%3Cpath d='M270,350 C270,350 300,330 330,350' stroke='%23FF4D6D' stroke-width='2' fill='none'/%3E%3Ccircle cx='700' cy='300' r='80' stroke='%23FF4D6D' stroke-width='1' fill='none' opacity='0.5'/%3E%3Ccircle cx='700' cy='300' r='50' stroke='%23FF4D6D' stroke-width='0.5' fill='none' opacity='0.7'/%3E%3Ccircle cx='700' cy='300' r='20' stroke='%23FF4D6D' stroke-width='1' fill='none' opacity='0.9'/%3E%3C/svg%3E",
                 isNew: true,
                 // Comic pages - Add your actual comic pages here
                 pages: [
@@ -1489,65 +1296,6 @@
             nextPageBtn.style.display = currentPage < totalPages ? 'flex' : 'none';
         }
         
-        // Admin panel functions
-        function toggleAdminPanel() {
-            const adminPanel = document.getElementById('adminPanel');
-            adminPanel.classList.toggle('active');
-        }
-        
-        function closeAdminPanel() {
-            const adminPanel = document.getElementById('adminPanel');
-            adminPanel.classList.remove('active');
-        }
-        
-        function addNewChapter() {
-            const chapterNumber = parseInt(document.getElementById('chapterNumber').value);
-            const chapterTitle = document.getElementById('chapterTitle').value;
-            const chapterSummary = document.getElementById('chapterSummary').value;
-            const bannerUrl = document.getElementById('bannerUrl').value;
-            
-            // Validate inputs
-            if (!chapterNumber || !chapterTitle || !chapterSummary || !bannerUrl) {
-                alert("Please fill in all fields");
-                return;
-            }
-            
-            // Create new comic chapter
-            const newChapterId = comics.length > 0 ? Math.max(...comics.map(c => c.id)) + 1 : 1;
-            
-            const newChapter = {
-                id: newChapterId,
-                chapterNumber: chapterNumber,
-                title: chapterTitle,
-                summary: chapterSummary,
-                date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
-                bannerImage: bannerUrl,
-                isNew: true,
-                pages: [] // Add your comic pages here
-            };
-            
-            // Add to comics array
-            comics.unshift(newChapter);
-            
-            // Mark older comics as not new
-            if (comics.length > 3) {
-                comics.slice(3).forEach(comic => comic.isNew = false);
-            }
-            
-            // Save to localStorage
-            localStorage.setItem('neuronadsComics', JSON.stringify(comics));
-            
-            // Close panel and refresh
-            closeAdminPanel();
-            renderComics();
-            
-            // Clear form
-            document.getElementById('chapterNumber').value = '';
-            document.getElementById('chapterTitle').value = '';
-            document.getElementById('chapterSummary').value = '';
-            document.getElementById('bannerUrl').value = '';
-        }
-        
         // Comic reader functions
         function openComicReader(comicId) {
             const comic = comics.find(c => c.id === comicId);
@@ -1653,12 +1401,6 @@
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
             });
-            
-            // Admin panel events
-            document.getElementById('adminButton').addEventListener('click', toggleAdminPanel);
-            document.getElementById('adminClose').addEventListener('click', closeAdminPanel);
-            document.getElementById('adminCancelBtn').addEventListener('click', closeAdminPanel);
-            document.getElementById('adminSaveBtn').addEventListener('click', addNewChapter);
             
             // Comic reader events
             document.getElementById('readerCloseBtn').addEventListener('click', closeComicReader);
