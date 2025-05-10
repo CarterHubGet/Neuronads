@@ -1,0 +1,1689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEURONADS: Comics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --neon-purple: #9D4EDD;
+            --neon-purple-light: #B964F7;
+            --neon-blue: #7B2CF3;
+            --dark-blue: #0E0B24;
+            --deeper-blue: #06051A;
+            --darkest-blue: #020213;
+            --text-color: #C8D8E4;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Chakra Petch', sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark-blue);
+            color: var(--text-color);
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(101, 45, 193, 0.2) 0%, transparent 30%),
+                radial-gradient(circle at 80% 80%, rgba(157, 78, 221, 0.2) 0%, transparent 30%),
+                linear-gradient(rgba(6, 5, 26, 0.9) 0%, rgba(6, 5, 26, 0.95) 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+            perspective: 1000px;
+        }
+        
+        /* Circuit board background effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath fill='none' stroke='%239D4EDD' stroke-width='0.25' d='M10,10 L90,10 M10,30 L90,30 M10,50 L90,50 M10,70 L90,70 M10,90 L90,90 M10,10 L10,90 M30,10 L30,90 M50,10 L50,90 M70,10 L70,90 M90,10 L90,90 M20,20 L20,40 L40,40 L40,20 Z M60,60 L60,80 L80,80 L80,60 Z'/%3E%3C/svg%3E");
+            opacity: 0.07;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        /* Infinite Space Background */
+        .infinite-space-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200%;
+            background-repeat: repeat-y;
+            background-size: 100% 50%;
+            animation: scrollSpace 120s linear infinite;
+            z-index: -3;
+            will-change: transform;
+        }
+        
+        @keyframes scrollSpace {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-50%);
+            }
+        }
+        
+        /* Stars background effect */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 0;
+            overflow: hidden;
+        }
+        
+        /* Header and Logo */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--neon-purple-light);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 0 10px rgba(157, 78, 221, 0.5), 0 0 20px rgba(157, 78, 221, 0.3);
+            animation: glitchText 5s infinite, floatLogo 3s ease-in-out infinite alternate;
+        }
+        
+        /* Neon effect for logo */
+        .logo::before, .logo::after {
+            content: "NEURONADS";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: var(--neon-purple-light);
+            filter: blur(0.5px);
+            z-index: -1;
+        }
+        
+        .logo::before {
+            opacity: 0.8;
+            filter: blur(5px);
+        }
+        
+        .logo::after {
+            opacity: 0.4;
+            filter: blur(15px);
+        }
+        
+        .subtitle {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 1.2rem;
+            color: var(--neon-blue);
+            letter-spacing: 5px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            animation: revealText 1s ease-out;
+        }
+        
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            margin: 0 auto 50px;
+            max-width: 800px;
+            border: 1px solid var(--neon-purple);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 0 15px rgba(157, 78, 221, 0.3);
+            animation: fadeIn 1s ease-out, glowPulse 4s infinite alternate;
+        }
+        
+        nav::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(157, 78, 221, 0.1);
+            z-index: -1;
+        }
+        
+        nav a {
+            flex: 1;
+            text-align: center;
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 15px 0;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            overflow: hidden;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 20%;
+            height: 60%;
+            width: 1px;
+            background: rgba(157, 78, 221, 0.3);
+        }
+        
+        nav a:last-child::after {
+            display: none;
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--neon-purple-light);
+            text-shadow: 0 0 5px rgba(157, 78, 221, 0.5);
+        }
+        
+        nav a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--neon-purple-light);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s ease;
+        }
+        
+        nav a:hover::before, nav a.active::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        /* Comics heading */
+        .comics-heading {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--neon-purple-light);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(157, 78, 221, 0.5), 0 0 20px rgba(157, 78, 221, 0.3);
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.5s;
+        }
+        
+        .comics-heading::before, .comics-heading::after {
+            content: "COMICS";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: var(--neon-purple-light);
+            filter: blur(0.5px);
+            z-index: -1;
+        }
+        
+        .comics-heading::before {
+            opacity: 0.8;
+            filter: blur(5px);
+        }
+        
+        .comics-heading::after {
+            opacity: 0.4;
+            filter: blur(15px);
+        }
+        
+        /* Comic Chapters Layout */
+        .comic-chapters {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+        
+        .comic-chapter {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+        
+        .comic-chapter.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .comic-banner {
+            width: 100%;
+            height: 300px;
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(6, 5, 26, 0.5);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            border: 1px solid var(--neon-purple);
+        }
+        
+        .comic-banner:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(157, 78, 221, 0.5);
+        }
+        
+        .comic-banner::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(6, 5, 26, 0.9) 0%, rgba(6, 5, 26, 0.5) 30%, rgba(6, 5, 26, 0.2) 60%, rgba(6, 5, 26, 0.7) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .comic-banner:hover::after {
+            background: linear-gradient(to bottom, rgba(6, 5, 26, 0.8) 0%, rgba(6, 5, 26, 0.4) 30%, rgba(6, 5, 26, 0.1) 60%, rgba(6, 5, 26, 0.6) 100%);
+        }
+        
+        .banner-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+        
+        .comic-banner:hover .banner-image {
+            transform: scale(1.05);
+        }
+        
+        .comic-info {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+        
+        .chapter-label {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--neon-purple-light);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .chapter-label::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--neon-purple-light);
+            box-shadow: 0 0 10px var(--neon-purple-light);
+        }
+        
+        .chapter-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+            max-width: 80%;
+            line-height: 1.2;
+        }
+        
+        .chapter-date {
+            font-size: 0.9rem;
+            color: rgba(200, 216, 228, 0.9);
+        }
+        
+        .chapter-summary {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            max-width: 60%;
+            z-index: 2;
+        }
+        
+        .summary-text {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            line-height: 1.5;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+        }
+        
+        .read-button {
+            display: inline-block;
+            background-color: rgba(157, 78, 221, 0.3);
+            border: 1px solid var(--neon-purple);
+            color: var(--text-color);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .read-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.5s ease;
+        }
+        
+        .read-button:hover {
+            background-color: var(--neon-purple);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(6, 5, 26, 0.5);
+        }
+        
+        .read-button:hover::before {
+            left: 100%;
+        }
+        
+        .new-tag {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background-color: var(--neon-purple);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 3;
+            box-shadow: 0 0 15px rgba(157, 78, 221, 0.7);
+            animation: pulse 2s infinite;
+        }
+        
+        /* Navigation buttons */
+        .comics-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .nav-button {
+            background-color: rgba(6, 5, 26, 0.7);
+            border: 1px solid var(--neon-purple);
+            color: var(--text-color);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-button:hover {
+            background-color: var(--neon-purple);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(157, 78, 221, 0.3);
+        }
+        
+        .nav-button i {
+            font-size: 0.8rem;
+        }
+        
+        /* Loading effect for content */
+        .loading-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(to right, var(--neon-purple), var(--neon-blue));
+            z-index: 9999;
+            box-shadow: 0 0 10px var(--neon-purple);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        /* Floating particles */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: -2;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: var(--neon-purple-light);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: floatParticle 15s linear infinite;
+        }
+        
+        .particle::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--neon-purple-light);
+            border-radius: 50%;
+            filter: blur(1px);
+        }
+        
+        /* Code for admin editor (hidden by default) */
+        .admin-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(6, 5, 26, 0.7);
+            border: 1px solid var(--neon-purple);
+            border-radius: 50%;
+            color: var(--neon-purple-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(6, 5, 26, 0.5);
+        }
+        
+        .admin-button:hover {
+            background-color: var(--neon-purple);
+            color: white;
+            transform: rotate(90deg);
+            box-shadow: 0 5px 20px rgba(157, 78, 221, 0.5);
+        }
+        
+        .admin-panel {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 350px;
+            background-color: var(--deeper-blue);
+            border: 1px solid var(--neon-purple);
+            border-radius: 10px;
+            padding: 20px;
+            z-index: 100;
+            transform: translateY(20px);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(6, 5, 26, 0.7);
+        }
+        
+        .admin-panel.active {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .admin-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--neon-purple-light);
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .admin-close {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-close:hover {
+            color: var(--neon-purple-light);
+            transform: rotate(90deg);
+        }
+        
+        .admin-field {
+            margin-bottom: 15px;
+        }
+        
+        .admin-label {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            margin-bottom: 5px;
+        }
+        
+        .admin-input, .admin-textarea {
+            width: 100%;
+            padding: 10px;
+            background-color: rgba(6, 5, 26, 0.5);
+            border: 1px solid var(--neon-purple);
+            border-radius: 5px;
+            color: var(--text-color);
+            font-size: 0.9rem;
+            font-family: 'Chakra Petch', sans-serif;
+        }
+        
+        .admin-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .admin-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .admin-save, .admin-cancel {
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-save {
+            background-color: var(--neon-purple);
+            color: white;
+            border: none;
+        }
+        
+        .admin-save:hover {
+            background-color: var(--neon-purple-light);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(157, 78, 221, 0.3);
+        }
+        
+        .admin-cancel {
+            background-color: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--text-color);
+        }
+        
+        .admin-cancel:hover {
+            background-color: rgba(200, 216, 228, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        /* Comic Reader Modal */
+        .comic-reader-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(6, 5, 26, 0.95);
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            overflow-y: auto;
+        }
+        
+        .comic-reader-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .comic-reader-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(to bottom, rgba(6, 5, 26, 0.9), transparent);
+            z-index: 210;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .comic-reader-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-right: 20px;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+        }
+        
+        .comic-reader-close {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(6, 5, 26, 0.7);
+            border: 1px solid var(--neon-purple);
+            border-radius: 50%;
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .comic-reader-close:hover {
+            background-color: var(--neon-purple);
+            color: white;
+            transform: rotate(90deg);
+        }
+        
+        .comic-reader-content {
+            width: 100%;
+            max-width: 1200px;
+            padding: 80px 20px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .comic-page {
+            width: 100%;
+            max-width: 900px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.5s ease;
+        }
+        
+        .comic-page.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .comic-page img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .comic-navigation-controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            background-color: rgba(6, 5, 26, 0.7);
+            border: 1px solid var(--neon-purple);
+            border-radius: 30px;
+            padding: 10px 20px;
+            z-index: 210;
+        }
+        
+        .comic-nav-button {
+            padding: 8px 20px;
+            background-color: transparent;
+            border: 1px solid var(--neon-purple);
+            border-radius: 20px;
+            color: var(--text-color);
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .comic-nav-button:hover {
+            background-color: var(--neon-purple);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(157, 78, 221, 0.3);
+        }
+        
+        .comic-nav-button i {
+            font-size: 0.8rem;
+        }
+        
+        .page-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 1rem;
+            padding: 0 15px;
+        }
+        
+        /* Media Queries */
+        @media (max-width: 1200px) {
+            .chapter-title {
+                font-size: 2rem;
+            }
+            
+            .comic-banner {
+                height: 250px;
+            }
+            
+            .summary-text {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .comics-heading {
+                font-size: 2rem;
+            }
+            
+            .comic-banner {
+                height: 220px;
+            }
+            
+            .comic-info {
+                padding: 20px;
+            }
+            
+            .chapter-title {
+                font-size: 1.5rem;
+                max-width: 100%;
+            }
+            
+            .chapter-summary {
+                position: relative;
+                bottom: auto;
+                left: auto;
+                margin-top: 20px;
+                max-width: 100%;
+            }
+            
+            .summary-text {
+                display: none;
+            }
+            
+            nav {
+                flex-wrap: wrap;
+            }
+            
+            nav a {
+                flex: auto;
+                width: 50%;
+            }
+            
+            nav a:nth-child(2n)::after {
+                display: none;
+            }
+            
+            .admin-panel {
+                width: 90%;
+                right: 5%;
+                left: 5%;
+            }
+            
+            .comic-reader-title {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container {
+                padding: 10px 0;
+            }
+            
+            body {
+                padding: 15px;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 0.8rem;
+                letter-spacing: 3px;
+            }
+            
+            .comics-heading {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+            
+            .comic-banner {
+                height: 180px;
+            }
+            
+            .comic-info {
+                padding: 15px;
+            }
+            
+            .chapter-label {
+                font-size: 0.8rem;
+            }
+            
+            .chapter-title {
+                font-size: 1.3rem;
+            }
+            
+            .read-button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .new-tag {
+                top: 15px;
+                right: 15px;
+                padding: 5px 10px;
+                font-size: 0.8rem;
+            }
+            
+            .admin-button {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            .comic-navigation-controls {
+                flex-wrap: wrap;
+                justify-content: center;
+                bottom: 10px;
+                width: 90%;
+                padding: 8px 15px;
+            }
+            
+            .comic-nav-button {
+                padding: 5px 10px;
+                font-size: 0.8rem;
+            }
+            
+            .page-indicator {
+                padding: 5px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+        
+        @keyframes floatLogo {
+            0%, 100% {
+                transform: translateY(0) rotate(-1deg);
+            }
+            50% {
+                transform: translateY(-10px) rotate(1deg);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+        }
+        
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+        
+        @keyframes glowPulse {
+            0%, 100% {
+                box-shadow: 0 0 10px rgba(157, 78, 221, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(157, 78, 221, 0.5);
+            }
+        }
+        
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes revealText {
+            0% {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes glitchText {
+            0%, 100% {
+                text-shadow: 0 0 10px rgba(157, 78, 221, 0.5), 0 0 20px rgba(157, 78, 221, 0.3);
+                transform: translateY(0);
+            }
+            5%, 95% {
+                text-shadow: 0.05em 0 0 rgba(255, 0, 0, .75), -0.025em -.05em 0 rgba(0, 255, 0, .75), .025em .05em 0 rgba(0, 0, 255, .75);
+                transform: translateY(-1px);
+            }
+            10%, 90% {
+                text-shadow: 0 0 10px rgba(157, 78, 221, 0.5), 0 0 20px rgba(157, 78, 221, 0.3);
+                transform: translateY(0);
+            }
+            15%, 85% {
+                text-shadow: 0.05em 0 0 rgba(255, 0, 0, .75), -0.025em -.05em 0 rgba(0, 255, 0, .75), .025em .05em 0 rgba(0, 0, 255, .75);
+                transform: translateY(1px);
+            }
+            20%, 80% {
+                text-shadow: 0 0 10px rgba(157, 78, 221, 0.5), 0 0 20px rgba(157, 78, 221, 0.3);
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-1000px) translateX(100px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-bar" id="loadingBar"></div>
+    <div class="infinite-space-bg" id="infiniteSpaceBg"></div>
+    <div class="stars" id="stars"></div>
+    <div class="particles-container" id="particles"></div>
+    
+    <div class="container">
+        <header>
+            <h1 class="logo">NEURONADS</h1>
+            <div class="subtitle">BLOCKCHAIN GUARDIANS</div>
+            
+            <nav>
+                <a href="index.html">LORE</a>
+                <a href="comics.html" class="active">COMICS</a>
+                <a href="mint.html">MINT</a>
+                <a href="about.html">about/contact</a>
+            </nav>
+        </header>
+        
+        <main>
+            <div class="comics-heading">READ THE COMICS</div>
+            
+            <div class="comic-chapters" id="comicChapters">
+                <!-- Comic chapters will be rendered here by JavaScript -->
+            </div>
+            
+            <div class="comics-navigation">
+                <button class="nav-button" id="prevPageBtn" style="display: none;">
+                    <i class="fas fa-chevron-left"></i> Previous Page
+                </button>
+                <button class="nav-button" id="nextPageBtn" style="display: none;">
+                    Next Page <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Admin Button (only visible to you) -->
+    <div class="admin-button" id="adminButton">
+        <i class="fas fa-cog"></i>
+    </div>
+    
+    <!-- Admin Panel for adding new comics (hidden by default) -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-title">
+            Add New Comic Chapter
+            <button class="admin-close" id="adminClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="admin-field">
+            <label class="admin-label">Chapter Number</label>
+            <input type="number" class="admin-input" id="chapterNumber" placeholder="e.g., 1">
+        </div>
+        
+        <div class="admin-field">
+            <label class="admin-label">Chapter Title</label>
+            <input type="text" class="admin-input" id="chapterTitle" placeholder="e.g., Rise of the Neuronads">
+        </div>
+        
+        <div class="admin-field">
+            <label class="admin-label">Chapter Summary</label>
+            <textarea class="admin-textarea" id="chapterSummary" placeholder="Brief description of this chapter..."></textarea>
+        </div>
+        
+        <div class="admin-field">
+            <label class="admin-label">Banner Image URL</label>
+            <input type="text" class="admin-input" id="bannerUrl" placeholder="URL to the banner image">
+        </div>
+        
+        <div class="admin-buttons">
+            <button class="admin-cancel" id="adminCancelBtn">Cancel</button>
+            <button class="admin-save" id="adminSaveBtn">Save Chapter</button>
+        </div>
+    </div>
+    
+    <!-- Comic Reader Modal -->
+    <div class="comic-reader-modal" id="comicReaderModal">
+        <div class="comic-reader-header">
+            <div class="comic-reader-title" id="readerTitle">Chapter 1: Rise of the Neuronads</div>
+            <button class="comic-reader-close" id="readerCloseBtn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="comic-reader-content" id="comicReaderContent">
+            <!-- Comic pages will be loaded here -->
+        </div>
+        
+        <div class="comic-navigation-controls">
+            <button class="comic-nav-button" id="prevPageComicBtn">
+                <i class="fas fa-chevron-left"></i> Previous
+            </button>
+            <div class="page-indicator">
+                Page <span id="currentPage">1</span> of <span id="totalPages">10</span>
+            </div>
+            <button class="comic-nav-button" id="nextPageComicBtn">
+                Next <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        // ============ COMIC DATA (EDIT THIS SECTION TO ADD NEW CHAPTERS) ============
+        // This array contains all comic chapters. Add new chapters here.
+        const comicChaptersData = [
+            {
+                id: 1,
+                chapterNumber: 1,
+                title: "Rise of the Neuronads",
+                summary: "In the vast expanse of the digital universe, the Neuronads emerge as guardians of the blockchain, defending against the chaotic forces that threaten to corrupt the network.",
+                date: "May 1, 2025",
+                bannerImage: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='400' viewBox='0 0 1200 400'%3E%3Crect width='1200' height='400' fill='%230E0B24'/%3E%3Ccircle cx='300' cy='200' r='100' fill='%239D4EDD' opacity='0.2'/%3E%3Ccircle cx='700' cy='250' r='150' fill='%239D4EDD' opacity='0.1'/%3E%3Cpath d='M200,100 C200,100 400,50 600,100 C800,150 1000,100 1000,100' stroke='%239D4EDD' stroke-width='1' fill='none' opacity='0.3'/%3E%3Cpath d='M0,300 C0,300 200,350 400,300 C600,250 800,350 1000,300 C1200,250 1200,300 1200,300' stroke='%239D4EDD' stroke-width='1' fill='none' opacity='0.3'/%3E%3Ccircle cx='300' cy='160' r='5' fill='%239D4EDD' opacity='0.8'/%3E%3Ccircle cx='260' cy='200' r='5' fill='%239D4EDD' opacity='0.8'/%3E%3Ccircle cx='340' cy='200' r='5' fill='%239D4EDD' opacity='0.8'/%3E%3Cpath d='M270,240 C270,240 300,260 330,240' stroke='%239D4EDD' stroke-width='2' fill='none'/%3E%3Ccircle cx='700' cy='200' r='50' stroke='%239D4EDD' stroke-width='1' fill='none' opacity='0.5'/%3E%3Ccircle cx='700' cy='200' r='30' stroke='%239D4EDD' stroke-width='0.5' fill='none' opacity='0.7'/%3E%3Ccircle cx='700' cy='200' r='10' stroke='%239D4EDD' stroke-width='1' fill='none' opacity='0.9'/%3E%3C/svg%3E",
+                isNew: true,
+                // Comic pages - Add your actual comic pages here
+                pages: [
+                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='1200' viewBox='0 0 800 1200'%3E%3Crect width='800' height='1200' fill='%230E0B24'/%3E%3Ctext x='400' y='100' text-anchor='middle' fill='%239D4EDD' font-family='Orbitron' font-size='40' font-weight='bold'%3EChapter 1%3C/text%3E%3Ctext x='400' y='160' text-anchor='middle' fill='white' font-family='Orbitron' font-size='30'%3ERise of the Neuronads%3C/text%3E%3Cline x1='200' y1='180' x2='600' y2='180' stroke='%239D4EDD' stroke-width='2'/%3E%3Crect x='100' y='220' width='600' height='400' fill='%230E0B24' stroke='%239D4EDD' stroke-width='2'/%3E%3Ccircle cx='400' cy='420' r='150' fill='%239D4EDD' opacity='0.2'/%3E%3Ccircle cx='400' cy='420' r='100' fill='none' stroke='%239D4EDD' stroke-width='2' opacity='0.5'/%3E%3Ccircle cx='400' cy='420' r='50' fill='none' stroke='%239D4EDD' stroke-width='1' opacity='0.8'/%3E%3Ctext x='400' y='700' text-anchor='middle' fill='white' font-family='Chakra Petch' font-size='20'%3EIn the vast digital expanse, a new force emerges.%3C/text%3E%3Ctext x='400' y='730' text-anchor='middle' fill='white' font-family='Chakra Petch' font-size='20'%3EThe Neuronads, born from the pure essence of blockchain,%3C/text%3E%3Ctext x='400' y='760' text-anchor='middle' fill='white' font-family='Chakra Petch' font-size='20'%3Eawaken to their purpose as guardians of the network.%3C/text%3E%3Crect x='100' y='800' width='600' height='300' fill='%230E0B24' stroke='%239D4EDD' stroke-width='2'/%3E%3Cpath d='M300,950 C300,900 350,900 400,950 C450,900 500,900 500,950' stroke='%239D4EDD' stroke-width='3' fill='none'/%3E%3Ccircle cx='250' cy='900' r='30' fill='%239D4EDD' opacity='0.3'/%3E%3Ccircle cx='550' cy='900' r='30' fill='%239D4EDD' opacity='0.3'/%3E%3C/svg%3E",
+                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='1200' viewBox='0 0 800 1200'%3E%3Crect width='800' height='1200' fill='%230E0B24'/%3E%3Crect x='50' y='50' width='700' height='300' fill='%230E0B24' stroke='%239D4EDD' stroke-width='2'/%3E%3Ccircle cx='200' cy='200' r='80' fill='%239D4EDD' opacity='0.2'/%3E%3Ccircle cx='200' cy='180' r='5' fill='%239D4EDD'/%3E%3Ccircle cx='230' cy='180' r='5' fill='%239D4EDD'/%3E%3Cpath d='M190,220 C190,220 210,230 230,220' stroke='%239D4EDD' stroke-width='2' fill='none'/%3E%3Cpath d='M600,150 C500,100 450,200 400,150' stroke='%239D4EDD' stroke-width='2' fill='none'/%3E%3Cpath d='M600,250 C500,200 450,300 400,250' stroke='%239D4EDD' stroke-width='2' fill='none'/%3E%3Ctext x='400' y='400' text-anchor='middle' fill='white' font-family='Chakra Petch' font-size='20'%3EAs digital threats emerge from the darkest corners,%3C/text%3E%3Ctext x='400' y='430' text-anchor='middle' fill='white' font-family='Chakra Petch' font-size='20'%3Ethe Neuronads stand vigilant, their neural networks alert.%3C/text%3E%3Crect x='50' y='500' width='700' height='600' fill='%230E0B24' stroke='%239D4EDD' stroke-width='2'/%3E%3Ccircle cx='400' cy='650' r='120' fill='none' stroke='%239D4EDD' stroke-width='1' opacity='0.5'/%3E%3Ccircle cx='400' cy='650' r='80' fill='none' stroke='%239D4EDD' stroke-width='2' opacity='0.7'/%3E%3Ccircle cx='400' cy='650' r='40' fill='%239D4EDD' opacity='0.3'/%3E%3Cline x1='400' y1='530' x2='400' y2='770' stroke='%239D4EDD' stroke-width='1' opacity='0.5'/%3E%3Cline x1='280' y1='650' x2='520' y2='650' stroke='%239D4EDD' stroke-width='1' opacity='0.5'/%3E%3Cline x1='310' y1='560' x2='490' y2='740' stroke='%239D4EDD' stroke-width='1' opacity='0.5'/%3E%3Cline x1='310' y1='740' x2='490' y2='560' stroke='%239D4EDD' stroke-width='1' opacity='0.5'/%3E%3Ctext x='400' y='850' text-anchor='middle' fill='white' font-family='Chakra Petch' font-size='22' font-weight='bold'%3EThe Origin Point%3C/text%3E%3Ctext x='400' y='900' text-anchor='middle' fill='white' font-family='Chakra Petch' font-size='18'%3EWhere code and consciousness converge,%3C/text%3E%3Ctext x='400' y='930' text-anchor='middle' fill='white' font-family='Chakra Petch' font-size='18'%3Egiving birth to the guardians of the digital realm.%3C/text%3E%3Ctext x='700' y='1150' text-anchor='end' fill='%239D4EDD' font-family='Chakra Petch' font-size='16'%3E1%3C/text%3E%3C/svg%3E",
+                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='1200' viewBox='0 0 800 1200'%3E%3Crect width='800' height='1200' fill='%230E0B24'/%3E%3Crect x='50' y='50' width='700' height='500' fill='%230E0B24' stroke='%239D4EDD' stroke-width='2'/%3E%3Cpath d='M100,300 C100,200 200,100 400,100 C600,100 700,200 700,300 C700,400 600,500 400,500 C200,500 100,400 100,300 Z' fill='none' stroke='%239D4EDD' stroke-width='1' opacity='0.5'/%3E%3Ccircle cx='400' cy='300' r='150' fill='%239D4EDD' opacity='0.1'/%3E%3Ccircle cx='400' cy='300' r='100' fill='none' stroke='%239D4EDD' stroke-width='1' opacity='0.7'/%3E%3Ccircle cx='400' cy='300' r='50' fill='none' stroke='%239D4EDD' stroke-width='2' opacity='0.9'/%3E%3Ccircle cx='400' cy='300' r='20' fill='%239D4EDD' opacity='0.5'/%3E%3Ctext x='400' y='600' text-anchor='middle' fill='white' font-family='Chakra Petch' font-size='20'%3EUnified by purpose, the Neuronads form a collective%3C/text%3E%3Ctext x='400' y='630' text-anchor='middle' fill='white' font-family='Chakra Petch' font-size='20'%3Econsciousness, a decentralized intelligence.%3C/text%3E%3Crect x='100' y='700' width='280' height='200' fill='%230E0B24' stroke='%239D4EDD' stroke-width='2'/%3E%3Crect x='420' y='700' width='280' height='200' fill='%230E0B24' stroke='%239D4EDD' stroke-width='2'/%3E%3Crect x='100' y='940' width='280' height='200' fill='%230E0B24' stroke='%239D4EDD' stroke-width='2'/%3E%3Crect x='420' y='940' width='280' height='200' fill='%230E0B24' stroke='%239D4EDD' stroke-width='2'/%3E%3Ccircle cx='240' cy='800' r='50' fill='%239D4EDD' opacity='0.2'/%3E%3Ccircle cx='560' cy='800' r='50' fill='%239D4EDD' opacity='0.2'/%3E%3Ccircle cx='240' cy='1040' r='50' fill='%239D4EDD' opacity='0.2'/%3E%3Ccircle cx='560' cy='1040' r='50' fill='%239D4EDD' opacity='0.2'/%3E%3Cline x1='240' y1='850' x2='240' y2='940' stroke='%239D4EDD' stroke-width='2' stroke-dasharray='5,5'/%3E%3Cline x1='560' y1='850' x2='560' y2='940' stroke='%239D4EDD' stroke-width='2' stroke-dasharray='5,5'/%3E%3Cline x1='290' y1='800' x2='510' y2='800' stroke='%239D4EDD' stroke-width='2' stroke-dasharray='5,5'/%3E%3Cline x1='290' y1='1040' x2='510' y2='1040' stroke='%239D4EDD' stroke-width='2' stroke-dasharray='5,5'/%3E%3Ctext x='700' y='1150' text-anchor='end' fill='%239D4EDD' font-family='Chakra Petch' font-size='16'%3E2%3C/text%3E%3C/svg%3E",
+                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='1200' viewBox='0 0 800 1200'%3E%3Crect width='800' height='1200' fill='%230E0B24'/%3E%3Crect x='50' y='50' width='700' height='350' fill='%230E0B24' stroke='%239D4EDD' stroke-width='2'/%3E%3Ccircle cx='400' cy='225' r='120' fill='none' stroke='%239D4EDD' stroke-width='1' opacity='0.2'/%3E%3Ccircle cx='400' cy='225' r='100' fill='none' stroke='%239D4EDD' stroke-width='1' opacity='0.3'/%3E%3Ccircle cx='400' cy='225' r='80' fill='none' stroke='%239D4EDD' stroke-width='1' opacity='0.4'/%3E%3Ccircle cx='400' cy='225' r='60' fill='none' stroke='%239D4EDD' stroke-width='1' opacity='0.5'/%3E%3Ccircle cx='400' cy='225' r='40' fill='none' stroke='%239D4EDD' stroke-width='1' opacity='0.6'/%3E%3Ccircle cx='400' cy='225' r='20' fill='%239D4EDD' opacity='0.7'/%3E%3Ctext x='400' y='450' text-anchor='middle' fill='white' font-family='Chakra Petch' font-size='20'%3EAnd so the story begins...%3C/text%3E%3Ctext x='400' y='480' text-anchor='middle' fill='white' font-family='Chakra Petch' font-size='20'%3EA new force awakens in the blockchain universe.%3C/text%3E%3Crect x='150' y='550' width='500' height='500' fill='%230E0B24' stroke='%239D4EDD' stroke-width='2'/%3E%3Cpath d='M200,800 C250,700 300,650 400,650 C500,650 550,700 600,800' stroke='%239D4EDD' stroke-width='3' fill='none'/%3E%3Ccircle cx='250' cy='750' r='20' fill='%239D4EDD' opacity='0.3'/%3E%3Ccircle cx='550' cy='750' r='20' fill='%239D4EDD' opacity='0.3'/%3E%3Ccircle cx='400' cy='700' r='30' fill='%239D4EDD' opacity='0.3'/%3E%3Ctext x='400' y='1100' text-anchor='middle' fill='white' font-family='Orbitron' font-size='24' font-weight='bold'%3ECONCLUSION OF CHAPTER 1%3C/text%3E%3Ctext x='400' y='1140' text-anchor='middle' fill='white' font-family='Chakra Petch' font-size='18'%3EContinue the journey in Chapter 2%3C/text%3E%3Ctext x='700' y='1150' text-anchor='end' fill='%239D4EDD' font-family='Chakra Petch' font-size='16'%3E3%3C/text%3E%3C/svg%3E"
+                ]
+            },
+            {
+                id: 2,
+                chapterNumber: 2,
+                title: "The Betrayal of the Insiders",
+                summary: "A shocking betrayal from within the ranks of the Neuronads threatens the stability of the entire system. Can the remaining guardians maintain order?",
+                date: "May 8, 2025",
+                bannerImage: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='400' viewBox='0 0 1200 400'%3E%3Crect width='1200' height='400' fill='%230E0B24'/%3E%3Ccircle cx='300' cy='200' r='100' fill='%23FF4D6D' opacity='0.2'/%3E%3Ccircle cx='700' cy='250' r='150' fill='%23FF4D6D' opacity='0.1'/%3E%3Cpath d='M200,100 C200,100 400,50 600,100 C800,150 1000,100 1000,100' stroke='%23FF4D6D' stroke-width='1' fill='none' opacity='0.3'/%3E%3Cpath d='M0,300 C0,300 200,350 400,300 C600,250 800,350 1000,300 C1200,250 1200,300 1200,300' stroke='%23FF4D6D' stroke-width='1' fill='none' opacity='0.3'/%3E%3Cpath d='M250,180 L270,210 L240,210 Z' fill='%23FF4D6D' opacity='0.8'/%3E%3Cpath d='M350,180 L370,210 L340,210 Z' fill='%23FF4D6D' opacity='0.8'/%3E%3Cpath d='M270,240 C270,240 300,220 330,240' stroke='%23FF4D6D' stroke-width='2' fill='none'/%3E%3Ccircle cx='700' cy='200' r='50' stroke='%23FF4D6D' stroke-width='1' fill='none' opacity='0.5'/%3E%3Ccircle cx='700' cy='200' r='30' stroke='%23FF4D6D' stroke-width='0.5' fill='none' opacity='0.7'/%3E%3Ccircle cx='700' cy='200' r='10' stroke='%23FF4D6D' stroke-width='1' fill='none' opacity='0.9'/%3E%3C/svg%3E",
+                isNew: true,
+                // Comic pages - Add your actual comic pages here
+                pages: [
+                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='1200' viewBox='0 0 800 1200'%3E%3Crect width='800' height='1200' fill='%230E0B24'/%3E%3Ctext x='400' y='100' text-anchor='middle' fill='%23FF4D6D' font-family='Orbitron' font-size='40' font-weight='bold'%3EChapter 2%3C/text%3E%3Ctext x='400' y='160' text-anchor='middle' fill='white' font-family='Orbitron' font-size='30'%3EThe Betrayal of the Insiders%3C/text%3E%3Cline x1='200' y1='180' x2='600' y2='180' stroke='%23FF4D6D' stroke-width='2'/%3E%3Crect x='100' y='220' width='600' height='400' fill='%230E0B24' stroke='%23FF4D6D' stroke-width='2'/%3E%3Ccircle cx='400' cy='420' r='150' fill='%23FF4D6D' opacity='0.1'/%3E%3Cpath d='M250,380 L270,410 L240,410 Z' fill='%23FF4D6D' opacity='0.8'/%3E%3Cpath d='M550,380 L570,410 L540,410 Z' fill='%23FF4D6D' opacity='0.8'/%3E%3Cpath d='M370,480 C370,480 400,450 430,480' stroke='%23FF4D6D' stroke-width='2' fill='none'/%3E%3Ctext x='400' y='700' text-anchor='middle' fill='white' font-family='Chakra Petch' font-size='20'%3EAs the Neuronads stand vigilant over the network,%3C/text%3E%3Ctext x='400' y='730' text-anchor='middle' fill='white' font-family='Chakra Petch' font-size='20'%3Ea disturbing revelation comes to light.%3C/text%3E%3Crect x='100' y='800' width='600' height='300' fill='%230E0B24' stroke='%23FF4D6D' stroke-width='2'/%3E%3Cpath d='M150,850 L650,850' stroke='%23FF4D6D' stroke-width='1' stroke-dasharray='5,5' opacity='0.5'/%3E%3Cpath d='M150,900 L650,900' stroke='%23FF4D6D' stroke-width='1' stroke-dasharray='5,5' opacity='0.5'/%3E%3Cpath d='M150,950 L650,950' stroke='%23FF4D6D' stroke-width='1' stroke-dasharray='5,5' opacity='0.5'/%3E%3Cpath d='M150,1000 L650,1000' stroke='%23FF4D6D' stroke-width='1' stroke-dasharray='5,5' opacity='0.5'/%3E%3Cpath d='M150,1050 L650,1050' stroke='%23FF4D6D' stroke-width='1' stroke-dasharray='5,5' opacity='0.5'/%3E%3Ccircle cx='200' cy='850' r='10' fill='%23FF4D6D' opacity='0.9'/%3E%3Ccircle cx='600' cy='900' r='10' fill='%23FF4D6D' opacity='0.9'/%3E%3Ccircle cx='300' cy='950' r='10' fill='%23FF4D6D' opacity='0.9'/%3E%3Ccircle cx='500' cy='1000' r='10' fill='%23FF4D6D' opacity='0.9'/%3E%3Ccircle cx='250' cy='1050' r='10' fill='%23FF4D6D' opacity='0.9'/%3E%3C/svg%3E",
+                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='1200' viewBox='0 0 800 1200'%3E%3Crect width='800' height='1200' fill='%230E0B24'/%3E%3Crect x='50' y='50' width='700' height='400' fill='%230E0B24' stroke='%23FF4D6D' stroke-width='2'/%3E%3Ccircle cx='200' cy='200' r='80' fill='%23FF4D6D' opacity='0.2'/%3E%3Cpath d='M170,180 L190,210 L160,210 Z' fill='%23FF4D6D' opacity='0.8'/%3E%3Cpath d='M230,180 L250,210 L220,210 Z' fill='%23FF4D6D' opacity='0.8'/%3E%3Cpath d='M170,240 C170,240 200,220 230,240' stroke='%23FF4D6D' stroke-width='2' fill='none'/%3E%3Cpath d='M500,150 L550,150 L550,350 L500,350 Z' fill='%23FF4D6D' opacity='0.1' stroke='%23FF4D6D' stroke-width='1'/%3E%3Cpath d='M575,150 L625,150 L625,350 L575,350 Z' fill='%23FF4D6D' opacity='0.1' stroke='%23FF4D6D' stroke-width='1'/%3E%3Ctext x='400' y='500' text-anchor='middle' fill='white' font-family='Chakra Petch' font-size='20'%3EWithin their sacred network, a rogue element emerges.%3C/text%3E%3Ctext x='400' y='530' text-anchor='middle' fill='white' font-family='Chakra Petch' font-size='20'%3EOne of their own has fallen to the lure of power.%3C/text%3E%3Crect x='50' y='580' width='700' height='400' fill='%230E0B24' stroke='%23FF4D6D' stroke-width='2'/%3E%3Ccircle cx='400' cy='780' r='150' fill='%23FF4D6D' opacity='0.05'/%3E%3Ccircle cx='400' cy='780' r='120' fill='none' stroke='%23FF4D6D' stroke-width='1' opacity='0.2' stroke-dasharray='5,5'/%3E%3Ccircle cx='400' cy='780' r='90' fill='none' stroke='%23FF4D6D' stroke-width='1' opacity='0.4' stroke-dasharray='5,5'/%3E%3Ccircle cx='400' cy='780' r='60' fill='none' stroke='%23FF4D6D' stroke-width='1' opacity='0.6' stroke-dasharray='5,5'/%3E%3Ccircle cx='400' cy='780' r='30' fill='none' stroke='%23FF4D6D' stroke-width='1' opacity='0.8' stroke-dasharray='5,5'/%3E%3Cpath d='M250,700 L350,650 L450,700 L550,650' stroke='%23FF4D6D' stroke-width='2' fill='none'/%3E%3Cpath d='M250,860 L350,910 L450,860 L550,910' stroke='%23FF4D6D' stroke-width='2' fill='none'/%3E%3Ctext x='400' y='1030' text-anchor='middle' fill='white' font-family='Chakra Petch' font-size='20' font-weight='bold'%3EThe integrity of the network is compromised.%3C/text%3E%3Ctext x='400' y='1070' text-anchor='middle' fill='white' font-family='Chakra Petch' font-size='18'%3EThe Neuronads must identify and neutralize the threat%3C/text%3E%3Ctext x='400' y='1100' text-anchor='middle' fill='white' font-family='Chakra Petch' font-size='18'%3Ebefore it's too late...%3C/text%3E%3Ctext x='700' y='1150' text-anchor='end' fill='%23FF4D6D' font-family='Chakra Petch' font-size='16'%3E1%3C/text%3E%3C/svg%3E",
+                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='1200' viewBox='0 0 800 1200'%3E%3Crect width='800' height='1200' fill='%230E0B24'/%3E%3Crect x='50' y='50' width='700' height='350' fill='%230E0B24' stroke='%23FF4D6D' stroke-width='2'/%3E%3Ccircle cx='200' cy='225' r='80' fill='%23FF4D6D' opacity='0.1'/%3E%3Ccircle cx='600' cy='225' r='80' fill='%23FF4D6D' opacity='0.1'/%3E%3Cpath d='M180,205 L220,205 L220,245 L180,245 Z' fill='none' stroke='%23FF4D6D' stroke-width='1'/%3E%3Cpath d='M580,205 L620,205 L620,245 L580,245 Z' fill='none' stroke='%23FF4D6D' stroke-width='1'/%3E%3Cpath d='M250,225 L550,225' stroke='%23FF4D6D' stroke-width='2' stroke-dasharray='10,10'/%3E%3Cpath d='M325,155 L475,155 L475,295 L325,295 Z' fill='%23FF4D6D' opacity='0.2' stroke='%23FF4D6D' stroke-width='1'/%3E%3Ctext x='400' y='450' text-anchor='middle' fill='white' font-family='Chakra Petch' font-size='20'%3EThe traitor revealed: Quantum, once a trusted%3C/text%3E%3Ctext x='400' y='480' text-anchor='middle' fill='white' font-family='Chakra Petch' font-size='20'%3Eguardian, now a threat to the entire network.%3C/text%3E%3Crect x='100' y='550' width='600' height='350' fill='%230E0B24' stroke='%23FF4D6D' stroke-width='2'/%3E%3Ccircle cx='400' cy='725' r='100' fill='%23FF4D6D' opacity='0.2'/%3E%3Cpath d='M350,700 L370,730 L340,730 Z' fill='%23FF4D6D' opacity='0.8'/%3E%3Cpath d='M450,700 L470,730 L440,730 Z' fill='%23FF4D6D' opacity='0.8'/%3E%3Cpath d='M370,780 C370,780 400,800 430,780' stroke='%23FF4D6D' stroke-width='3' fill='none'/%3E%3Cpath d='M180,625 L300,625' stroke='%23FF4D6D' stroke-width='1'/%3E%3Cpath d='M500,625 L620,625' stroke='%23FF4D6D' stroke-width='1'/%3E%3Cpath d='M180,825 L300,825' stroke='%23FF4D6D' stroke-width='1'/%3E%3Cpath d='M500,825 L620,825' stroke='%23FF4D6D' stroke-width='1'/%3E%3Ctext x='400' y='950' text-anchor='middle' fill='white' font-family='Chakra Petch' font-size='20' font-weight='bold'%3EWith a dark purpose revealed, Quantum's betrayal%3C/text%3E%3Ctext x='400' y='980' text-anchor='middle' fill='white' font-family='Chakra Petch' font-size='20' font-weight='bold'%3Ethreatens everything the Neuronads stand for.%3C/text%3E%3Ctext x='400' y='1080' text-anchor='middle' fill='white' font-family='Orbitron' font-size='24' font-weight='bold'%3ETo be continued...%3C/text%3E%3Ctext x='700' y='1150' text-anchor='end' fill='%23FF4D6D' font-family='Chakra Petch' font-size='16'%3E2%3C/text%3E%3C/svg%3E"
+                ]
+            }
+        ];
+        
+        // ============ INITIALIZATION AND CONFIGURATION ============
+        // Global variables
+        let comics = JSON.parse(localStorage.getItem('neuronadsComics')) || comicChaptersData;
+        const itemsPerPage = 5;
+        let currentPage = 1;
+        let currentReaderComic = null;
+        let currentReaderPage = 0;
+        
+        // Generate the tall, scrolling space background
+        function generateSpaceBackground() {
+            const spaceBg = document.getElementById('infiniteSpaceBg');
+            
+            // Create a tall SVG for the seamless scrolling background
+            const topSpaceSVG = `
+<svg xmlns="http://www.w3.org/2000/svg" width="2560" height="25600" viewBox="0 0 2560 25600">
+    <defs>
+        <radialGradient id="starGlow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+            <stop offset="0%" stop-color="#B964F7" stop-opacity="0.8"/>
+            <stop offset="100%" stop-color="#B964F7" stop-opacity="0"/>
+        </radialGradient>
+    </defs>
+    <rect width="2560" height="25600" fill="#0E0B24"/>
+    
+    <!-- Background Nebulae -->
+    ${Array(30).fill().map(() => {
+        const x = Math.random() * 2560;
+        const y = Math.random() * 25600;
+        const radius = Math.random() * 500 + 200;
+        const opacity = Math.random() * 0.2 + 0.05;
+        return `<circle cx="${x}" cy="${y}" r="${radius}" fill="#9D4EDD" fill-opacity="${opacity}"/>`;
+    }).join('')}
+    
+    <!-- Stars - Small -->
+    ${Array(2000).fill().map(() => {
+        const x = Math.random() * 2560;
+        const y = Math.random() * 25600;
+        const radius = Math.random() * 1.5 + 0.5;
+        const opacity = Math.random() * 0.8 + 0.2;
+        return `<circle cx="${x}" cy="${y}" r="${radius}" fill="white" fill-opacity="${opacity}"/>`;
+    }).join('')}
+    
+    <!-- Stars - Medium -->
+    ${Array(500).fill().map(() => {
+        const x = Math.random() * 2560;
+        const y = Math.random() * 25600;
+        const radius = Math.random() * 2 + 1;
+        const opacity = Math.random() * 0.9 + 0.1;
+        return `<circle cx="${x}" cy="${y}" r="${radius}" fill="white" fill-opacity="${opacity}"/>`;
+    }).join('')}
+    
+    <!-- Stars - Large -->
+    ${Array(100).fill().map(() => {
+        const x = Math.random() * 2560;
+        const y = Math.random() * 25600;
+        const radius = Math.random() * 3 + 2;
+        return `<circle cx="${x}" cy="${y}" r="${radius}" fill="white"/>
+                <circle cx="${x}" cy="${y}" r="${radius * 3}" fill="url(#starGlow)"/>`;
+    }).join('')}
+    
+    <!-- Purple Stars -->
+    ${Array(150).fill().map(() => {
+        const x = Math.random() * 2560;
+        const y = Math.random() * 25600;
+        const radius = Math.random() * 2.5 + 1.5;
+        return `<circle cx="${x}" cy="${y}" r="${radius}" fill="#B964F7"/>
+                <circle cx="${x}" cy="${y}" r="${radius * 4}" fill="url(#starGlow)"/>`;
+    }).join('')}
+    
+    <!-- Constellation Lines -->
+    ${Array(30).fill().map(() => {
+        const x1 = Math.random() * 2560;
+        const y1 = Math.random() * 25600;
+        const x2 = x1 + (Math.random() * 400 - 200);
+        const y2 = y1 + (Math.random() * 400 - 200);
+        return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#9D4EDD" stroke-width="0.5" stroke-opacity="0.3"/>`;
+    }).join('')}
+    
+    <!-- Distant Galaxies -->
+    ${Array(15).fill().map(() => {
+        const cx = Math.random() * 2560;
+        const cy = Math.random() * 25600;
+        const rx = Math.random() * 100 + 50;
+        const ry = Math.random() * 40 + 20;
+        const opacity = Math.random() * 0.15 + 0.05;
+        const rotation = Math.random() * 360;
+        return `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" transform="rotate(${rotation} ${cx} ${cy})" fill="#9D4EDD" fill-opacity="${opacity}"/>`;
+    }).join('')}
+    
+    <!-- Make the bottom match up with the top for seamless looping -->
+    <!-- Additional stars at the bottom edge that match the top of the image -->
+    ${Array(200).fill().map((_, i) => {
+        const x = (i / 200) * 2560;
+        const y1 = 25500; // near bottom
+        const y2 = 100; // near top
+        const radius = Math.random() * 2 + 0.5;
+        return `<circle cx="${x}" cy="${y1}" r="${radius}" fill="white"/>
+                <circle cx="${x}" cy="${y2}" r="${radius}" fill="white"/>`;
+    }).join('')}
+</svg>`;
+            
+            const dataUrl = 'data:image/svg+xml;base64,' + btoa(topSpaceSVG);
+            spaceBg.style.backgroundImage = `url("${dataUrl}")`;
+        }
+        
+        // Show loading bar
+        function initLoadingBar() {
+            const loadingBar = document.getElementById('loadingBar');
+            let loadWidth = 0;
+            const loadingInterval = setInterval(() => {
+                loadWidth += 5;
+                loadingBar.style.width = loadWidth + '%';
+                
+                if (loadWidth >= 100) {
+                    clearInterval(loadingInterval);
+                    setTimeout(() => {
+                        loadingBar.style.opacity = '0';
+                    }, 500);
+                }
+            }, 50);
+        }
+        
+        // Create stars in the background
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starsCount = Math.floor(window.innerWidth * window.innerHeight / 1000);
+            
+            for (let i = 0; i < starsCount; i++) {
+                const star = document.createElement('div');
+                const size = Math.random() * 2;
+                
+                star.style.position = 'absolute';
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.backgroundColor = 'white';
+                star.style.borderRadius = '50%';
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.opacity = Math.random() * 0.8;
+                star.style.animation = `twinkle ${Math.random() * 3 + 2}s ease-in-out infinite alternate`;
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                
+                starsContainer.appendChild(star);
+            }
+            
+            // Add some larger purple stars/nebulae
+            for (let i = 0; i < 10; i++) {
+                const nebula = document.createElement('div');
+                const size = Math.random() * 4 + 2;
+                
+                nebula.style.position = 'absolute';
+                nebula.style.width = `${size}px`;
+                nebula.style.height = `${size}px`;
+                nebula.style.backgroundColor = 'var(--neon-purple-light)';
+                nebula.style.borderRadius = '50%';
+                nebula.style.left = `${Math.random() * 100}%`;
+                nebula.style.top = `${Math.random() * 100}%`;
+                nebula.style.opacity = Math.random() * 0.5;
+                nebula.style.boxShadow = '0 0 10px var(--neon-purple-light)';
+                nebula.style.animation = `pulse ${Math.random() * 4 + 3}s ease-in-out infinite alternate`;
+                nebula.style.animationDelay = `${Math.random() * 5}s`;
+                
+                starsContainer.appendChild(nebula);
+            }
+        }
+        
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random starting position
+                const x = Math.random() * 100;
+                const y = Math.random() * 100 + 100; // Start from below
+                
+                // Random size
+                const size = Math.random() * 3 + 1;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${x}%`;
+                particle.style.top = `${y}%`;
+                
+                // Random animation duration and delay
+                const duration = Math.random() * 10 + 10;
+                const delay = Math.random() * 5;
+                
+                particle.style.animation = `floatParticle ${duration}s linear infinite`;
+                particle.style.animationDelay = `-${delay}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Render comic chapters
+        function renderComics() {
+            const comicChaptersContainer = document.getElementById('comicChapters');
+            const prevPageBtn = document.getElementById('prevPageBtn');
+            const nextPageBtn = document.getElementById('nextPageBtn');
+            
+            // Sort comics by chapter number (newest first)
+            const sortedComics = [...comics].sort((a, b) => b.chapterNumber - a.chapterNumber);
+            
+            // Calculate pagination
+            const totalPages = Math.ceil(sortedComics.length / itemsPerPage);
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = Math.min(startIndex + itemsPerPage, sortedComics.length);
+            const displayedComics = sortedComics.slice(startIndex, endIndex);
+            
+            // Clear existing content
+            comicChaptersContainer.innerHTML = '';
+            
+            // Render comic chapters
+            displayedComics.forEach((comic, index) => {
+                const comicChapter = document.createElement('div');
+                comicChapter.className = 'comic-chapter';
+                comicChapter.setAttribute('data-id', comic.id);
+                
+                // Add visible class with delay for animation
+                setTimeout(() => {
+                    comicChapter.classList.add('visible');
+                }, index * 200);
+                
+                // New tag for recent comics
+                const newTagHTML = comic.isNew ? `<div class="new-tag">NEW</div>` : '';
+                
+                comicChapter.innerHTML = `
+                    <div class="comic-banner" onclick="openComicReader(${comic.id})">
+                        ${newTagHTML}
+                        <img src="${comic.bannerImage}" alt="Chapter ${comic.chapterNumber}" class="banner-image">
+                        <div class="comic-info">
+                            <div class="chapter-label">Chapter ${comic.chapterNumber}</div>
+                            <h2 class="chapter-title">${comic.title}</h2>
+                            <div class="chapter-date">${comic.date}</div>
+                        </div>
+                        <div class="chapter-summary">
+                            <p class="summary-text">${comic.summary}</p>
+                            <div class="read-button">Read Chapter</div>
+                        </div>
+                    </div>
+                `;
+                
+                comicChaptersContainer.appendChild(comicChapter);
+            });
+            
+            // Show/hide pagination buttons
+            prevPageBtn.style.display = currentPage > 1 ? 'flex' : 'none';
+            nextPageBtn.style.display = currentPage < totalPages ? 'flex' : 'none';
+        }
+        
+        // Admin panel functions
+        function toggleAdminPanel() {
+            const adminPanel = document.getElementById('adminPanel');
+            adminPanel.classList.toggle('active');
+        }
+        
+        function closeAdminPanel() {
+            const adminPanel = document.getElementById('adminPanel');
+            adminPanel.classList.remove('active');
+        }
+        
+        function addNewChapter() {
+            const chapterNumber = parseInt(document.getElementById('chapterNumber').value);
+            const chapterTitle = document.getElementById('chapterTitle').value;
+            const chapterSummary = document.getElementById('chapterSummary').value;
+            const bannerUrl = document.getElementById('bannerUrl').value;
+            
+            // Validate inputs
+            if (!chapterNumber || !chapterTitle || !chapterSummary || !bannerUrl) {
+                alert("Please fill in all fields");
+                return;
+            }
+            
+            // Create new comic chapter
+            const newChapterId = comics.length > 0 ? Math.max(...comics.map(c => c.id)) + 1 : 1;
+            
+            const newChapter = {
+                id: newChapterId,
+                chapterNumber: chapterNumber,
+                title: chapterTitle,
+                summary: chapterSummary,
+                date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+                bannerImage: bannerUrl,
+                isNew: true,
+                pages: [] // Add your comic pages here
+            };
+            
+            // Add to comics array
+            comics.unshift(newChapter);
+            
+            // Mark older comics as not new
+            if (comics.length > 3) {
+                comics.slice(3).forEach(comic => comic.isNew = false);
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('neuronadsComics', JSON.stringify(comics));
+            
+            // Close panel and refresh
+            closeAdminPanel();
+            renderComics();
+            
+            // Clear form
+            document.getElementById('chapterNumber').value = '';
+            document.getElementById('chapterTitle').value = '';
+            document.getElementById('chapterSummary').value = '';
+            document.getElementById('bannerUrl').value = '';
+        }
+        
+        // Comic reader functions
+        function openComicReader(comicId) {
+            const comic = comics.find(c => c.id === comicId);
+            if (!comic || !comic.pages || comic.pages.length === 0) {
+                alert("This comic chapter doesn't have any pages yet.");
+                return;
+            }
+            
+            currentReaderComic = comic;
+            currentReaderPage = 0;
+            
+            // Set comic reader title
+            document.getElementById('readerTitle').textContent = `Chapter ${comic.chapterNumber}: ${comic.title}`;
+            
+            // Set total pages
+            document.getElementById('totalPages').textContent = comic.pages.length;
+            document.getElementById('currentPage').textContent = 1;
+            
+            // Clear previous content
+            const readerContent = document.getElementById('comicReaderContent');
+            readerContent.innerHTML = '';
+            
+            // Load first page
+            loadComicPage(currentReaderPage);
+            
+            // Show modal
+            document.getElementById('comicReaderModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeComicReader() {
+            document.getElementById('comicReaderModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            currentReaderComic = null;
+            currentReaderPage = 0;
+        }
+        
+        function loadComicPage(pageIndex) {
+            if (!currentReaderComic || pageIndex < 0 || pageIndex >= currentReaderComic.pages.length) return;
+            
+            const readerContent = document.getElementById('comicReaderContent');
+            
+            // Create page element
+            const pageElement = document.createElement('div');
+            pageElement.className = 'comic-page';
+            pageElement.innerHTML = `<img src="${currentReaderComic.pages[pageIndex]}" alt="Page ${pageIndex + 1}">`;
+            
+            // Clear previous content
+            readerContent.innerHTML = '';
+            readerContent.appendChild(pageElement);
+            
+            // Animate entrance
+            setTimeout(() => {
+                pageElement.classList.add('active');
+            }, 100);
+            
+            // Update page indicator
+            document.getElementById('currentPage').textContent = pageIndex + 1;
+        }
+        
+        function navigateComicPage(direction) {
+            if (!currentReaderComic) return;
+            
+            if (direction === 'next' && currentReaderPage < currentReaderComic.pages.length - 1) {
+                currentReaderPage++;
+                loadComicPage(currentReaderPage);
+            } else if (direction === 'prev' && currentReaderPage > 0) {
+                currentReaderPage--;
+                loadComicPage(currentReaderPage);
+            }
+        }
+        
+        // ============ EVENT LISTENERS ============
+        // Initialize the app
+        function init() {
+            // Generate background
+            generateSpaceBackground();
+            
+            // Show loading bar
+            initLoadingBar();
+            
+            // Create stars and particles
+            createStars();
+            createParticles();
+            
+            // Render comics
+            renderComics();
+            
+            // Add event listeners for pagination
+            document.getElementById('prevPageBtn').addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderComics();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+            
+            document.getElementById('nextPageBtn').addEventListener('click', () => {
+                const totalPages = Math.ceil(comics.length / itemsPerPage);
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderComics();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+            
+            // Admin panel events
+            document.getElementById('adminButton').addEventListener('click', toggleAdminPanel);
+            document.getElementById('adminClose').addEventListener('click', closeAdminPanel);
+            document.getElementById('adminCancelBtn').addEventListener('click', closeAdminPanel);
+            document.getElementById('adminSaveBtn').addEventListener('click', addNewChapter);
+            
+            // Comic reader events
+            document.getElementById('readerCloseBtn').addEventListener('click', closeComicReader);
+            document.getElementById('prevPageComicBtn').addEventListener('click', () => navigateComicPage('prev'));
+            document.getElementById('nextPageComicBtn').addEventListener('click', () => navigateComicPage('next'));
+            
+            // Keyboard navigation for comic reader
+            document.addEventListener('keydown', (e) => {
+                if (!currentReaderComic) return;
+                
+                if (e.key === 'ArrowRight' || e.key === ' ') {
+                    navigateComicPage('next');
+                } else if (e.key === 'ArrowLeft') {
+                    navigateComicPage('prev');
+                } else if (e.key === 'Escape') {
+                    closeComicReader();
+                }
+            });
+        }
+        
+        // Make openComicReader globally accessible
+        window.openComicReader = openComicReader;
+        
+        // Initialize on DOM content loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
